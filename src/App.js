@@ -1,28 +1,55 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { getTest } from '../src/selectors';
+import { fetchTest } from '../src/reducers/testReducer/actions';
+import './assets/styles/_base.scss';
 
 class App extends Component {
+  state = {
+    isLoaded: false,
+  };
+  componentDidMount = () => {
+    this.props.fetchTest().then(() =>
+      this.setState({
+        isLoaded: true,
+      }),
+    );
+  };
   render() {
+    const { viewTest } = this.props;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <ul>
+          {viewTest.map(test => (
+            <li key={test.id}>{test.testName}</li>
+          ))}
+        </ul>
       </div>
     );
   }
 }
 
-export default App;
+App.propTypes = {
+  viewTest: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = state => {
+  return {
+    viewTest: getTest(state),
+  };
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchTest,
+    },
+    dispatch,
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);

@@ -1,0 +1,4 @@
+export default {
+  FETCH_TEST: 'FETCH_TEST',
+  FETCH_TEST_SUCCESS: 'FETCH_TEST_SUCCESS',
+};
