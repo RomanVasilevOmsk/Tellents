@@ -3,7 +3,7 @@
     width: 100%;
     background-color: white;
     min-height: 75px;
-    border-bottom: 1px solid #d9dada; 
+    border-bottom: 1px solid #d9dada;
     -webkit-border-radius: 0 0 6px 6px;
     -moz-border-radius: 0 0 6px 6px;
     -ms-border-radius: 0 0 6px 6px;
@@ -154,7 +154,7 @@
 .main-top-nav .user-box .user-photo {
     width: 28px;
     height: 28px;
-    margin: 5px;
+    margin: 9px;
     background-image: url(../images/user-photo.jpg);
     background-position: center;
     background-repeat: no-repeat;
@@ -171,10 +171,15 @@
 .main-top-nav .user-box .user-box-nav a {
     color: #768b98;
     text-decoration: none;
+    display: block;
+}
+.main-top-nav .user-box .user-box-nav a:after{
+    display: none;
 }
 .main-top-nav .user-box .user-box-nav .dropdown-menu {
     left: auto;
     right: 0;
+    top: 35px!important;
 }
 .main-top-nav .user-box .user-box-nav .dropdown-toggle .caret {
     border-top-color: #15a4fa;

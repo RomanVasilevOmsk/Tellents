@@ -36,16 +36,6 @@ h2 {
     font-weight: normal;
 }
 
-h1 {
-}
-
-h2 {
-  
-}
-h3 {
-   
-}
-
 h4 {
     font-size: 18px;
     line-height: 30px;
@@ -88,6 +78,14 @@ a:hover{
 .caret {
     margin-top: -3px;
     margin-left: 5px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid\9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
 }
 
 .dropdown-menu {
@@ -130,7 +128,7 @@ a:hover{
   margin-bottom: 10px;
   text-align: left;
 }
- 
+
 .dropdown-menu > li > a.btn-dropdown:hover{
   background: #54c78d;
   color: #fff;
@@ -410,7 +408,7 @@ section.item-group {
 }
 .item-group .item-info .item-info_title .icon {
     color: #b4b7bb;
-    font-size: 20px;    
+    font-size: 20px;
 }
 .item-group .item-info > span {
     display: inline-block;
@@ -535,7 +533,7 @@ section.item-group {
     margin: auto 5px;
     opacity: 0.9;
     padding-left: 5px;
-} 
+}
 
 
 .caret-top {

@@ -1,5 +1,5 @@
 import ActionTypes from '../../actionTypes';
-import uid from 'uid';
+// import uid from 'uid';
 
 import { fetchTestRequest } from '../../api';
 
@@ -7,7 +7,7 @@ export const fetchTest = () => dispatch => {
   dispatch({
     type: ActionTypes.FETCH_TEST,
     isFetching: true,
-});
+  });
   return fetchTestRequest()
     .then(res => {
       dispatch({

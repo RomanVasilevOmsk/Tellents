@@ -2693,7 +2693,7 @@ textarea.comments-area {
 #accounts .display-table .info-btn-wrapper .info-btn-content tr:last-child .display-table-th{
     border-bottom: none;
 }
-/*PAYMENTS-METHODS*/
+
 #payments-methods .tab-pane-header {
     padding: 35px 0 5px;
 }
@@ -2702,7 +2702,7 @@ textarea.comments-area {
     height: 235px;
     display: inline-block;
     margin-right: 30px;
-    background-color: rgba(246, 246, 246, );
+    background-color: rgba(246, 246, 246, 0);
     border: solid 1px #e2dfdf;
     cursor: pointer;
     -webkit-transition: all ease 0.25s;

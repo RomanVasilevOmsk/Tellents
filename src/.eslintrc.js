@@ -27,5 +27,15 @@ module.exports = {
     'no-unused-vars': 'warn',
     'prettier/prettier': 'warn',
     'flowtype/no-types-missing-file-annotation': 'warn',
+    "jsx-a11y/anchor-is-valid": [ "off", {
+      "components": [ "Link" ],
+      "specialLink": [ "hrefLeft", "hrefRight" ],
+      "aspects": [ "noHref", "invalidHref", "preferButton" ]
+    }]
   },
+  settings: {
+      react: {
+          version: "latest"
+      }
+  }
 };

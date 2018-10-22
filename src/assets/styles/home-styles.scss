@@ -1,5 +1,5 @@
 /*HOME-PAGE - START*/
-@import url('chat-window.css');
+@import url('chat-window.scss');
 
 .home-page .wrapper {
     position: relative;
@@ -64,7 +64,7 @@
     font-size: 12px;
     letter-spacing: -.25px;
     display: inline-block;
-    margin: 5px; 
+    margin: 5px;
 }
 .content-header .job-post-status.flexbox > div {
     margin: auto 0;
@@ -76,7 +76,7 @@
     text-decoration: underline;
 }
 .content-header .job-post-status .status-text {
-    font-size: 12px; 
+    font-size: 12px;
 }
 .content-header .job-post-status .btn {
     margin: auto 0;
@@ -362,12 +362,12 @@
     margin-bottom: 0;
     background-color: #eaeaea;
     border-radius: 15px;
-    -webkit-box-shadow:none;
+    box-shadow:none;
 }
 .progress-bar {
     background-color: #15a4fa;
     transition: width .6s ease;
-    -webkit-box-shadow:none;
+    box-shadow:none;
 }
 .panel-btn {
     padding: 0;
@@ -375,7 +375,6 @@
 .panel-btn a{
     display: block;
     padding: 30px 15px;
-     -webkit-transition: all ease 0.25s;
     transition: all ease 0.25s;
 }
 .panel-btn a:hover{
@@ -505,7 +504,7 @@
     display: none;
 }
 .job-box.awarded .job-box-photo-block .award {
-    display: block;   
+    display: block;
 }
 .job-box-name {
     font-size: 14px;
@@ -622,7 +621,7 @@
     font-size: 13px;
 }
 .job-boxes--jobs .job-box-details .job-details-right .job-details-descr .job-descr-text  p {
-    margin: 10px 0; 
+    margin: 10px 0;
 }
 .job-box-tips {
     -webkit-flex-shrink: 0;
@@ -927,7 +926,7 @@
     color: #15a4fa;
 }
 .job-details-right .other-details {
-    padding: 5px 35px 30px; 
+    padding: 5px 35px 30px;
 }
 .job-details-right .other-details .panel {
     margin: 8px 0;
@@ -948,17 +947,17 @@
 }
 .job-details-right .other-details .panel-orange {
     background-color: #ffeecd;
-    border: solid 1px #ffd79a; 
-    color: #ffa51e;   
+    border: solid 1px #ffd79a;
+    color: #ffa51e;
 }
 .job-details-right .other-details .panel-pink {
     background-color: #fae2ff;
-    border: solid 1px #cbb4cf;  
-    color: #b774c5;      
+    border: solid 1px #cbb4cf;
+    color: #b774c5;
 }
 .job-details-right .other-details .other-title {
     font-size: 13px;
-    font-weight: 600;     
+    font-weight: 600;
 }
 .job-details-right .other-details .btn {
     border-width: 2px;
@@ -1217,9 +1216,6 @@ footer ul li a{
     border: 1px solid #fff;
 }
 
-.element-list__person-icon{
-
-}
 
 .element-list .element-list__item-icon img{
     max-width: 100%;
@@ -1249,7 +1245,3 @@ footer ul li a{
     color: #4b5053;
     opacity: 0.5;
 }
-/*NOTIFICATIONS - END*/
-
-
-/*HOME-PAGE - END
