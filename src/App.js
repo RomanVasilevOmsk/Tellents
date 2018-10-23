@@ -7,7 +7,7 @@ import { fetchTest } from '../src/reducers/testReducer/actions';
 import Layout from './components/Layout';
 import ContentHeader from './components/ContentHeader';
 import JobBoxesHeader from './components/JobBoxesHeader';
-import 'bootstrap/dist/js/bootstrap.min.js';
+// import 'bootstrap/dist/js/bootstrap.min.js';
 import './assets/styles/_base.scss';
 
 class App extends Component {
