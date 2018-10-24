@@ -443,12 +443,12 @@
 /*RIGHT-SIDEBAR - END*/
 
 /*JOB-BOXES - START*/
-.job-boxes.job-boxes--talents .job-boxes-wrapper--jobs,
-.job-boxes.job-boxes--jobs .job-boxes-wrapper--talents,
-.job-boxes.job-boxes--jobs .noresults--tallents,
-.job-boxes.job-boxes--talents .noresults--jobs{
-    display: none;
-}
+// .job-boxes.job-boxes--talents .job-boxes-wrapper--jobs,
+// .job-boxes.job-boxes--jobs .job-boxes-wrapper--talents,
+// .job-boxes.job-boxes--jobs .noresults--tallents,
+// .job-boxes.job-boxes--talents .noresults--jobs{
+//     display: none;
+// }
 .job-boxes.job-boxes--talents .job-boxes-wrapper--talents,
 .job-boxes.job-boxes--jobs .job-boxes-wrapper--jobs{
     display: flex;
@@ -620,6 +620,9 @@
   font-weight: 600;
   line-height: 1.2;
   color: #4b5053;
+}
+.btn.radio-switcher{
+    margin: auto 5px;
 }
 .job-boxes--jobs .job-box-rate {
     font-size: 14px;
