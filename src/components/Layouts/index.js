@@ -4,13 +4,11 @@ import Footer from './../Footer';
 import PropTypes from 'prop-types';
 
 const Layout = ({ children }) => (
-  <div className="wrapper">
+  <React.Fragment>
     <Header />
-    <div className="content">
-      <div className="container-fluid">{children}</div>
-    </div>
+    <div className="content">{children}</div>
     <Footer />
-  </div>
+  </React.Fragment>
 );
 
 Layout.propTypes = {

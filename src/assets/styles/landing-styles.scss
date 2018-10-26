@@ -1,16 +1,10 @@
-@import url('icons.css');
-@import url('font.css');
+@import "vendor/normalize";
+@import "common/icons.scss";
+@import "common/font.scss";
+@import "common/buttons";
+@import "reusable.scss";
 
-@import url('reusable.css');
-@import url('buttons.css');
 
-html, body,
-body section,
-body header  {
-	min-height: 100vh;
-    height: auto;
-	width: 100%;
-}
 .landing .wrapper {
 	max-width: 1240px;
 	min-height: auto;
@@ -171,7 +165,7 @@ body header  {
 	margin: 0 0 10px 0;
 }
 .landing-header .search-form {
-	/*padding: 85px 0;*/
+	padding: 85px 0;
 }
 .landing-header .nav-btns .btn{
 	-webkit-border-radius: 0;
@@ -219,16 +213,15 @@ body header  {
 .landing-header .my-search-form .btn-search {
 	position: absolute;
     top: 50%;
-    margin-top: -8px;
     left: 25px;
     font-size: 16px;
-    color: #58677a;
+		color: #58677a;
+		width: 15px;
 }
 .landing-header .my-search-form .search-filter {
 	width: 240px;
 	position: absolute;
 	right: 0;
-	top: 0;
 	font-size: 13px;
 	font-weight: 600;
 	font-style: normal;
@@ -315,7 +308,7 @@ body header  {
 }
 .landing-header .sign-up-block {
 	color: #6e8bb2;
-} 
+}
 .landing-header .sign-up-block .or-block hr {
 	border-color: #516b8d;
 }
@@ -324,11 +317,7 @@ body header  {
 
 
 /*SECTIONS - START*/
-section {
-	/*padding: 100px 0;*/
-	padding: 70px 0;
-	background-color: #f0f4f5;
-}
+
 .section-title {
 	padding: 45px 0;
 	text-align: center;
@@ -587,7 +576,7 @@ section {
     bottom: 0;
     width: 100%;
     color: #fff;
-} 
+}
 .tallents-slider-item  .panel-info .tallent-title {
 	margin-bottom: 10px;
 }
@@ -653,7 +642,7 @@ section {
 }
 .category-item-icon {
 	font-size: 55px;
-} 
+}
 .category-item-text {
 	font-size: 18px;
 	font-weight: bold;

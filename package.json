@@ -55,6 +55,7 @@
     "react-dev-utils": "^6.0.5",
     "react-dom": "^16.5.2",
     "react-final-form": "^3.6.7",
+    "react-modal": "^3.6.1",
     "react-radio-group": "^3.0.3",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
