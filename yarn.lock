@@ -666,6 +666,12 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
+"@babel/runtime@^7.1.5":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
+  dependencies:
+    regenerator-runtime "^0.12.0"
+
 "@babel/template@7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.0.0-beta.44.tgz#f8832f4fdcee5d59bf515e595fc5106c529b394f"
@@ -3425,6 +3431,12 @@ fill-range@^4.0.0:
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
 
+final-form@^4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.11.0.tgz#81750bda11b82c3ddf7b27092f29ebe427f8a560"
+  dependencies:
+    "@babel/runtime" "^7.1.5"
+
 finalhandler@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/finalhandler/-/finalhandler-1.1.1.tgz#eebf4ed840079c83f4249038c9d703008301b105"
@@ -4118,6 +4130,10 @@ ignore@^4.0.2, ignore@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
 
+immer@^1.9.3:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-1.9.3.tgz#e88f8cbea730d2cde0f5e7e763000a8608bccdae"
+
 immutable@^3.8.2:
   version "3.8.2"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
@@ -4606,6 +4622,15 @@ istanbul-reports@^1.5.1:
   dependencies:
     handlebars "^4.0.3"
 
+j-toker@^0.0.10-beta3:
+  version "0.0.10-beta3"
+  resolved "https://registry.yarnpkg.com/j-toker/-/j-toker-0.0.10-beta3.tgz#37380689d5d7663e50b741be6c4639b1792d04e7"
+  dependencies:
+    jquery ">1.11.2"
+    jquery-deparam "^0.1.0"
+    jquery.cookie "^1.4.1"
+    pubsub-js "^1.5.2"
+
 jest-changed-files@^23.4.2:
   version "23.4.2"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-23.4.2.tgz#1eed688370cd5eebafe4ae93d34bb3b64968fe83"
@@ -4908,7 +4933,15 @@ joi@^11.1.1:
     isemail "3.x.x"
     topo "2.x.x"
 
-jquery@^3.3.1:
+jquery-deparam@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/jquery-deparam/-/jquery-deparam-0.1.0.tgz#eaa60c1699fab7637d1acb8d2a08c72d095a0b96"
+
+jquery.cookie@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/jquery.cookie/-/jquery.cookie-1.4.1.tgz#d63dce209eab691fe63316db08ca9e47e0f9385b"
+
+jquery@>1.11.2, jquery@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
@@ -6936,6 +6969,10 @@ public-encrypt@^4.0.0:
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
     safe-buffer "^5.1.2"
+
+pubsub-js@^1.5.2:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/pubsub-js/-/pubsub-js-1.7.0.tgz#eca97f9a4217bef62b2d3aaa1552005260cc2e49"
 
 pump@^2.0.0, pump@^2.0.1:
   version "2.0.1"

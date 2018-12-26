@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import FormSignUp from '../Forms/FormSignUp';
 
 class SignUpModal extends Component {
   render() {
-    const { modalIsOpen, closeModal } = this.props;
+    const { modalIsOpen, closeModal, handleSignUp } = this.props;
     return (
       <div>
         <Modal
@@ -27,7 +28,8 @@ class SignUpModal extends Component {
                   Join over 2 million tallents already using Tellents. Start now for free!
                 </div>
                 <div className="modal-form">
-                  <form>
+                  <FormSignUp onSubmit={handleSignUp} />
+                  {/* <form>
                     <div className="input-wrapper">
                       <input type="text" className="form-control" placeholder="First Name" required />
                       <span className="error-message" />
@@ -50,7 +52,7 @@ class SignUpModal extends Component {
                         START NOW
                       </span>
                     </button>
-                  </form>
+                  </form> */}
                 </div>
               </div>
               <div className="modal-footer">
@@ -77,5 +79,6 @@ SignUpModal.propTypes = {
   modalIsOpen: PropTypes.bool,
   openModal: PropTypes.func,
   closeModal: PropTypes.func,
+  handleSignUp: PropTypes.func,
 };
 export default SignUpModal;

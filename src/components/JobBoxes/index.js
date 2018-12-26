@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import LeftSideBar from './LeftSidebar';
 import RightSidebar from './RightSidebar';
@@ -17,7 +17,7 @@ class JobBoxes extends React.Component {
             <div className="flexbox row">
               <div className="col-xs-12">
                 {dataArrow ? (
-                  <React.Fragment>
+                  <Fragment>
                     <div className="job-boxes-wrapper job-boxes-wrapper--jobs flexbox justify-space-between flex-wrap">
                       <JobItem />
                       <JobItem />
@@ -29,7 +29,7 @@ class JobBoxes extends React.Component {
                     <div className="job-boxes-footer">
                       <button className="btn btn-bg-transparent blue-color btn-bold">Load more</button>
                     </div>
-                  </React.Fragment>
+                  </Fragment>
                 ) : (
                   <div className="noresults noresults--jobs">
                     <img src={EmptyJobs} alt="Empty Jobs" />
@@ -46,7 +46,7 @@ class JobBoxes extends React.Component {
             <div className="flexbox row">
               <div className="col-xs-12">
                 {dataArrow ? (
-                  <React.Fragment>
+                  <Fragment>
                     <div className="job-boxes-wrapper job-boxes-wrapper--talents flexbox justify-space-between flex-wrap">
                       <TellentsItem />
                       <TellentsItem />
@@ -56,7 +56,7 @@ class JobBoxes extends React.Component {
                     <div className="job-boxes-footer">
                       <button className="btn btn-bg-transparent blue-color btn-bold">Load more</button>
                     </div>
-                  </React.Fragment>
+                  </Fragment>
                 ) : (
                   <div className="noresults noresults--tallents">
                     <img src={EmptyTellents} alt="Empty Tellents" />
