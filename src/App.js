@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import SearchPage from './pages/Search';
-import Landing from './pages/Landing';
+import Landing from './pages/landing';
 import Overview from './pages/Profile/Overview';
 import Messages from './pages/Profile/Messages';
 import MyJobs from './pages/Profile/MyJobs';
