@@ -23,9 +23,9 @@ function AppContainer(Component) {
   };
 
   const mapStateToProps = state => {
+    console.log('state', state);
     return {
       isAuthenticated: state.authReducer.isAuthenticated,
-      
     };
   };
 
