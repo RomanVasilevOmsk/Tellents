@@ -6,8 +6,8 @@ import Layout from '../components/Layouts';
 import ContentHeader from '../components/ContentHeader';
 import JobBoxesHeader from '../components/JobBoxesHeader';
 import JobBoxes from '../components/JobBoxes';
-import { getTest } from '../selectors';
-import { fetchTest } from '../reducers/testReducer/actions';
+// import { getTest } from '../selectors';
+// import { fetchTest } from '../reducers/testReducer/actions';
 
 class SearchPage extends React.Component {
   state = {
@@ -15,13 +15,13 @@ class SearchPage extends React.Component {
     isLoaded: false,
     jobTalentsToogler: 'jobs',
   };
-  componentDidMount = () => {
-    this.props.fetchTest().then(() =>
-      this.setState({
-        isLoaded: true,
-      }),
-    );
-  };
+  // componentDidMount = () => {
+  //   this.props.fetchTest().then(() =>
+  //     this.setState({
+  //       isLoaded: true,
+  //     }),
+  //   );
+  // };
 
   onChangeJobTalentsToogler = value => {
     this.setState({ jobTalentsToogler: value });
@@ -36,7 +36,7 @@ class SearchPage extends React.Component {
   };
 
   render() {
-    const { viewTest } = this.props;
+    // const { viewTest } = this.props;
     return (
       <div className="home-page">
         <div className="wrapper">
@@ -49,11 +49,11 @@ class SearchPage extends React.Component {
                 onToogleJobTalentsToogler={this.onToogleJobTalentsToogler}
               />
               <JobBoxes jobTalentsToogler={this.state.jobTalentsToogler} dataArrow={this.state.dataArrow} />
-              <ul>
+              {/* <ul>
                 {viewTest.map(test => (
                   <li key={test.id}>{test.testName}</li>
                 ))}
-              </ul>
+              </ul> */}
             </div>
           </Layout>
         </div>
@@ -63,20 +63,20 @@ class SearchPage extends React.Component {
 }
 
 SearchPage.propTypes = {
-  viewTest: PropTypes.array.isRequired,
-  fetchTest: PropTypes.func,
+  // viewTest: PropTypes.array.isRequired,
+  // fetchTest: PropTypes.func,
 };
 
 const mapStateToProps = state => {
   return {
-    viewTest: getTest(state),
+    // viewTest: getTest(state),
   };
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchTest,
+      // fetchTest,
     },
     dispatch,
   );

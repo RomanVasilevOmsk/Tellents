@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import SearchPage from './pages/Search';
 import Landing from './pages/landing';
 import Overview from './pages/Profile/Overview';
@@ -13,9 +14,11 @@ import Accounts from './pages/Profile/Accounts';
 import Profile from './pages/Profile';
 import NoMatch from './pages/NoMatch';
 import './assets/styles/_base.scss';
+import appContainer from './containers/AppContainer';
 
 class App extends Component {
   render() {
+    const { isAuthenticated } = this.props;
     return (
       <div className="App">
         <Router>
@@ -40,4 +43,9 @@ class App extends Component {
     );
   }
 }
-export default App;
+
+App.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};
+
+export default appContainer(App);

@@ -26,7 +26,7 @@ export const login = payload => dispatch => {
     type: ActionTypes.LOGIN_REQUEST,
   });
   console.log('payload', payload);
-  Auth.signIn(payload)
+  Auth.emailSignIn(payload)
     .then(response => response.data)
     .then(payload =>
       dispatch({
@@ -45,7 +45,7 @@ export const logout = payload => dispatch => {
   dispatch({
     type: ActionTypes.LOGOUT_REQUEST,
   });
-  console.log('payload', payload);
+  console.log('payload logout', payload);
   Auth.signOut(payload)
     .then(response => response.data)
     .then(payload =>

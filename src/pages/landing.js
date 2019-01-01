@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import LandingHeader from '../components/Landing/LandingHeader';
 import SignUpModal from '../components/Landing/SignUpModal';
 import SignInModal from '../components/Landing/SignInModal';
-import AppContainer from '../containers/AppContainer';
+import authContainer from '../containers/AuthContainer';
 // import { bindActionCreators } from 'redux';
 // import { signUp } from '../reducers/auth/actions';
 import '../assets/styles/landing-styles.scss';
@@ -31,8 +31,8 @@ class Landing extends Component {
   };
 
   render() {
-    const { onSignUp } = this.props;
-    console.log("props", this.props);
+    const { signUp, login } = this.props;
+    // console.log("props", this.props);
     return (
       <div className="landing">
         <LandingHeader openModalSignUp={this.onOpenModalSignUp} openModalSignIn={this.onOpenModalSignIn} />
@@ -40,12 +40,13 @@ class Landing extends Component {
           modalIsOpen={this.state.modalIsOpenSignUp}
           openModal={this.onOpenModalSignUp}
           closeModal={this.onCloseModalSignUp}
-          onSignUp={onSignUp}
+          onSignUp={signUp}
         />
         <SignInModal
           modalIsOpen={this.state.modalIsOpenSignIn}
           openModal={this.onOpenModalSignIn}
           closeModal={this.onCloseModalSignIn}
+          onlogin={login}
         />
       </div>
     );
@@ -53,7 +54,8 @@ class Landing extends Component {
 }
 
 Landing.propTypes = {
-  onSignUp: PropTypes.func.isRequired,
+  signUp: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
-export default AppContainer(Landing);
+export default authContainer(Landing);

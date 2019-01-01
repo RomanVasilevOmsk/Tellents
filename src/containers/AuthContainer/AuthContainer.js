@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { signUp, logout, login } from '../../reducers/auth/actions';
 
-function appContainer(Component) {
-  class AppContainer extends Component {
+function authContainer(Component) {
+  class AuthContainer extends Component {
     handleSignUp = user => {
       this.props.signUp(user);
     };
@@ -15,7 +17,7 @@ function appContainer(Component) {
     }
   }
 
-  AppContainer.propTypes = {
+  AuthContainer.propTypes = {
     isAuthenticated: PropTypes.bool,
     signUp: PropTypes.func,
   };
@@ -27,11 +29,14 @@ function appContainer(Component) {
     };
   };
 
+  const mapDispatchToProps = dispatch => {
+    return bindActionCreators({ signUp, logout, login }, dispatch);
+  };
 
   return connect(
     mapStateToProps,
-    null,
-  )(AppContainer);
+    mapDispatchToProps,
+  )(AuthContainer);
 }
 
-export default appContainer;
+export default authContainer;

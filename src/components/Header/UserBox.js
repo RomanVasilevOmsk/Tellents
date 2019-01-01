@@ -1,10 +1,12 @@
 import React from 'react';
 import dropDown from '../../HOCS/dropDown';
 import PropTypes from 'prop-types';
+import authContainer from '../../containers/AuthContainer';
 
 class UserBox extends React.Component {
   render() {
-    const { onOpenDropDown, isDropDownOpened } = this.props;
+    const { onOpenDropDown, isDropDownOpened, logout } = this.props;
+    console.log('props', this.props.logout);
     return (
       <div className="user-box-nav dropdown" onClick={onOpenDropDown}>
         <a
@@ -36,6 +38,9 @@ class UserBox extends React.Component {
             <li>
               <a href="#">One more separated link</a>
             </li>
+            <li onClick={logout}>
+              <a href="#">Logout</a>
+            </li>
           </ul>
         )}
       </div>
@@ -46,6 +51,7 @@ class UserBox extends React.Component {
 UserBox.propTypes = {
   onOpenDropDown: PropTypes.func,
   isDropDownOpened: PropTypes.bool,
+  logout: PropTypes.func,
 };
 
-export default dropDown(UserBox);
+export default authContainer(dropDown(UserBox));

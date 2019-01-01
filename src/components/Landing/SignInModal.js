@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import FormSignIn from '../Forms/FormSignIn';
 
 class SignUpModal extends Component {
   render() {
-    const { modalIsOpen, closeModal } = this.props;
+    const { modalIsOpen, closeModal, onlogin } = this.props;
     return (
       <div>
         <Modal
@@ -43,36 +44,7 @@ class SignUpModal extends Component {
                         <span className="omb_spanOr">or</span>
                       </div>
                     </div>
-                    <form className="form-signin user-signin" name="sessionsForm">
-                      <input
-                        className="form-control ng-pristine ng-empty ng-valid-email ng-invalid ng-invalid-required ng-touched"
-                        placeholder="Email Adress"
-                        required="required"
-                        type="email"
-                        defaultValue=""
-                      />
-                      <input
-                        className="form-control"
-                        placeholder="Password (8 or more characters)"
-                        required="required"
-                        type="password"
-                      />
-                      <div className="row">
-                        <div className="col-md-12">
-                          <div className="form-group">
-                            <input
-                              type="submit"
-                              name="commit"
-                              defaultValue="Log In"
-                              className="btn btn-lg btn-primary login"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <a className="edit-pass" href="#">
-                        Forgot your password
-                      </a>
-                    </form>
+                    <FormSignIn onSubmit={onlogin} />
                   </div>
                 </div>
               </div>
@@ -88,5 +60,6 @@ SignUpModal.propTypes = {
   modalIsOpen: PropTypes.bool,
   openModal: PropTypes.func,
   closeModal: PropTypes.func,
+  onlogin: PropTypes.func,
 };
 export default SignUpModal;
