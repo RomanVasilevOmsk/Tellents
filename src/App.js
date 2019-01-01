@@ -13,6 +13,7 @@ import MyMedia from './pages/Profile/MyMedia';
 import Accounts from './pages/Profile/Accounts';
 import Profile from './pages/Profile';
 import NoMatch from './pages/NoMatch';
+import PrivateRoute from './pages/PrivateRoute';
 import './assets/styles/_base.scss';
 import appContainer from './containers/AppContainer';
 
@@ -24,7 +25,6 @@ class App extends Component {
         <Router>
           <div className="layout-inner">
             <Switch>
-              <Route exact path="/" component={SearchPage} />
               <Route exact path="/landing" component={Landing} />
               <Route exact path="/profile/overview" component={Overview} />
               <Route exact path="/profile/messages" component={Messages} />
@@ -35,6 +35,7 @@ class App extends Component {
               <Route exact path="/profile/media" component={MyMedia} />
               <Route exact path="/profile/accounts" component={Accounts} />
               <Route exact path="/profile/profile" component={Profile} />
+              <PrivateRoute isAuthenticated={isAuthenticated} path="/" component={SearchPage} />
               <Route component={NoMatch} />
             </Switch>
           </div>

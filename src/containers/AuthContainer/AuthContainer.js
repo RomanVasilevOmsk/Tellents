@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect, Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { signUp, logout, login } from '../../reducers/auth/actions';
 
@@ -13,6 +14,10 @@ function authContainer(Component) {
     handleLogin = (password, email) => {};
 
     render() {
+      console.log('props', this.props);
+      // const { from } = this.props.location.state || { from: { pathname: '/' } };
+      if (this.props.isAuthenticated) return <Redirect to="/" />;
+
       return <Component {...this.props} />;
     }
   }
