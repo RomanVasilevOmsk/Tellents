@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import LandingHeader from '../components/Landing/LandingHeader';
 import SignUpModal from '../components/Landing/SignUpModal';
 import SignInModal from '../components/Landing/SignInModal';
-import authContainer from '../containers/AuthContainer';
-// import { bindActionCreators } from 'redux';
-// import { signUp } from '../reducers/auth/actions';
+import appContainer from '../containers/AppContainer';
 import '../assets/styles/landing-styles.scss';
 import '../assets/styles/modals.scss';
 import '../assets/styles/landing-media.scss';
@@ -31,8 +29,13 @@ class Landing extends Component {
   };
 
   render() {
-    const { signUp, login } = this.props;
-    // console.log("props", this.props);
+    const { signUp, login, isAuthenticated } = this.props;
+    const { from } = this.props.location.state || { from: { pathname: '/search' } };
+
+    if (isAuthenticated) {
+      return <Redirect to={from} />;
+    }
+
     return (
       <div className="landing">
         <LandingHeader openModalSignUp={this.onOpenModalSignUp} openModalSignIn={this.onOpenModalSignIn} />
@@ -56,6 +59,8 @@ class Landing extends Component {
 Landing.propTypes = {
   signUp: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+  location: PropTypes.object,
 };
 
-export default authContainer(Landing);
+export default appContainer(Landing);

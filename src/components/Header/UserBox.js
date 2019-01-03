@@ -1,11 +1,12 @@
 import React from 'react';
 import dropDown from '../../HOCS/dropDown';
 import PropTypes from 'prop-types';
-import authContainer from '../../containers/AuthContainer';
+import appContainer from '../../containers/AppContainer';
 
 class UserBox extends React.Component {
   render() {
-    const { onOpenDropDown, isDropDownOpened, logout } = this.props;
+    const { onOpenDropDown, isDropDownOpened, logout, user } = this.props;
+    const { first_name, last_name } = user;
     console.log('props', this.props.logout);
     return (
       <div className="user-box-nav dropdown" onClick={onOpenDropDown}>
@@ -17,7 +18,7 @@ class UserBox extends React.Component {
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Philip Seamor
+          {first_name && last_name ? `${first_name} ${last_name}` : ''}
           <span className="caret" />
         </a>
         {isDropDownOpened && (
@@ -52,6 +53,7 @@ UserBox.propTypes = {
   onOpenDropDown: PropTypes.func,
   isDropDownOpened: PropTypes.bool,
   logout: PropTypes.func,
+  user: PropTypes.object,
 };
 
-export default authContainer(dropDown(UserBox));
+export default appContainer(dropDown(UserBox));
