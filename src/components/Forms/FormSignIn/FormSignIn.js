@@ -42,12 +42,16 @@ class FormSignIn extends Component {
                   password
                 />
               </div>
-              <button className="btn btn-blue btn-with-icon" onClick={handleSubmit}>
-                <span className="button-content">
-                  <span className="icon icon-right-arrow" />
-                  LOG IN
-                </span>
-              </button>
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="form-group">
+                    <button className="btn btn-lg btn-primary login" onClick={handleSubmit}>
+                      <span className="button-content">LOG IN</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <a className="edit-pass" href="#">
                 Forgot your password
               </a>

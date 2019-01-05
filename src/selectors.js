@@ -1,1 +1,3 @@
-// export const getTest = state => state.getIn(['test', 'test']).toJS();
+export const isAuthenticated = state => state.authReducer.isAuthenticated;
+export const getUserData = state => state.authReducer.user;
+export const getJobs = state => state.jobsReducer.jobs;

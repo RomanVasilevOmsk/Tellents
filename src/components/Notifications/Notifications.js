@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import dropDown from '../../HOCS/dropDown';
 import PropTypes from 'prop-types';
 import BidPhoto from '../../assets/images/bid-photo.png';
@@ -6,7 +6,7 @@ import MoneyIcon from '../../assets/images/money-icon.png';
 import HornIcon from '../../assets/images/horn-icon.png';
 import CaseIconGrey from '../../assets/images/case-icon-grey.png';
 
-class Notifications extends React.Component {
+class Notifications extends Component {
   render() {
     const { onOpenDropDown, isDropDownOpened } = this.props;
 

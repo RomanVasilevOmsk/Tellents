@@ -24,6 +24,11 @@ export default function authReducer(state = initialState, action) {
         draft.isAuthenticated = false;
         return;
       }
+      case ActionTypes.TOKEN_SUCCESS: {
+        draft.user = action.payload;
+        draft.isAuthenticated = true;
+        return;
+      }
       default:
         return state;
     }

@@ -12,13 +12,8 @@ const dropDown = WrappedComponent => {
 
     render() {
       const { ...props } = this.props;
-      return (
-        <WrappedComponent
-          onOpenDropDown={this.openDropDown}
-          isDropDownOpened={this.state.isDropDownOpened}
-          {...props}
-        />
-      );
+      const { isDropDownOpened } = this.state;
+      return <WrappedComponent onOpenDropDown={this.openDropDown} isDropDownOpened={isDropDownOpened} {...props} />;
     }
   };
 };

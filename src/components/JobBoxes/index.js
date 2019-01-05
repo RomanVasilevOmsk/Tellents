@@ -8,7 +8,7 @@ import EmptyJobs from '../../assets/images/jobs@2x.png';
 import EmptyTellents from '../../assets/images/tallents@2x.png';
 class JobBoxes extends React.Component {
   render() {
-    const { dataArrow, jobTalentsToogler } = this.props;
+    const { jobTalentsToogler, jobs } = this.props;
     return (
       <div className="row main-content flexbox">
         <LeftSideBar />
@@ -16,15 +16,12 @@ class JobBoxes extends React.Component {
           <div className="col-xs-10 container-fluid job-boxes job-boxes--jobs">
             <div className="flexbox row">
               <div className="col-xs-12">
-                {dataArrow ? (
+                {jobs ? (
                   <Fragment>
                     <div className="job-boxes-wrapper job-boxes-wrapper--jobs flexbox justify-space-between flex-wrap">
-                      <JobItem />
-                      <JobItem />
-                      <JobItem />
-                      <JobItem />
-                      <JobItem />
-                      <JobItem />
+                      {jobs.map(item => (
+                        <JobItem key={item.id} item={item} />
+                      ))}
                     </div>
                     <div className="job-boxes-footer">
                       <button className="btn btn-bg-transparent blue-color btn-bold">Load more</button>
@@ -45,7 +42,7 @@ class JobBoxes extends React.Component {
           <div className="col-xs-10 container-fluid job-boxes job-boxes--tallents">
             <div className="flexbox row">
               <div className="col-xs-12">
-                {dataArrow ? (
+                {jobs ? (
                   <Fragment>
                     <div className="job-boxes-wrapper job-boxes-wrapper--talents flexbox justify-space-between flex-wrap">
                       <TellentsItem />
@@ -75,8 +72,8 @@ class JobBoxes extends React.Component {
 }
 
 JobBoxes.propTypes = {
-  dataArrow: PropTypes.bool.isRequired,
   jobTalentsToogler: PropTypes.string.isRequired,
+  jobs: PropTypes.array,
 };
 
 export default JobBoxes;

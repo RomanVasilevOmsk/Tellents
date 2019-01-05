@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import dropDown from '../../HOCS/dropDown';
 import PropTypes from 'prop-types';
-import appContainer from '../../containers/AppContainer';
 
-class UserBox extends React.Component {
+class UserBoxDropDown extends Component {
   render() {
     const { onOpenDropDown, isDropDownOpened, logout, user } = this.props;
     const { first_name, last_name } = user;
-    console.log('props', this.props.logout);
     return (
       <div className="user-box-nav dropdown" onClick={onOpenDropDown}>
         <a
@@ -49,11 +47,11 @@ class UserBox extends React.Component {
   }
 }
 
-UserBox.propTypes = {
+UserBoxDropDown.propTypes = {
   onOpenDropDown: PropTypes.func,
   isDropDownOpened: PropTypes.bool,
   logout: PropTypes.func,
   user: PropTypes.object,
 };
 
-export default appContainer(dropDown(UserBox));
+export default dropDown(UserBoxDropDown);

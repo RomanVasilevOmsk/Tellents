@@ -1,13 +1,13 @@
 import React from 'react';
-import Navigation from '../Profile/Navigation';
+import ProfileNavigation from '../ProfileNavigation';
 import PropTypes from 'prop-types';
 
-const LayoutProfile = ({ children }) => (
+export const LayoutProfile = ({ children }) => (
   <div className="panel panel-default my-main-panel">
     <div className="panel-body">
       <div className="flexbox">
         <div className="right-col">
-          <Navigation />
+          <ProfileNavigation />
         </div>
         <div className="left-col">{children}</div>
       </div>

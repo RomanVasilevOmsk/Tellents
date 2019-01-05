@@ -1,27 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import Layout from '../components/Layouts';
+import { MainLayout } from '../components/Layouts';
 import ContentHeader from '../components/ContentHeader';
 import JobBoxesHeader from '../components/JobBoxesHeader';
 import JobBoxes from '../components/JobBoxes';
-// import { getTest } from '../selectors';
-// import { fetchTest } from '../reducers/testReducer/actions';
+import searchContainer from '../containers/SearchContainer';
 
 class SearchPage extends React.Component {
   state = {
-    dataArrow: true,
-    isLoaded: false,
     jobTalentsToogler: 'jobs',
   };
-  // componentDidMount = () => {
-  //   this.props.fetchTest().then(() =>
-  //     this.setState({
-  //       isLoaded: true,
-  //     }),
-  //   );
-  // };
 
   onChangeJobTalentsToogler = value => {
     this.setState({ jobTalentsToogler: value });
@@ -36,26 +24,21 @@ class SearchPage extends React.Component {
   };
 
   render() {
-    // const { viewTest } = this.props;
+    const { jobs, user } = this.props;
     return (
       <div className="home-page">
         <div className="wrapper">
-          <Layout>
+          <MainLayout>
             <div className="container-fluid">
-              <ContentHeader />
+              <ContentHeader user={user} />
               <JobBoxesHeader
                 jobTalentsToogler={this.state.jobTalentsToogler}
                 onChangeJobTalentsToogler={this.onChangeJobTalentsToogler}
                 onToogleJobTalentsToogler={this.onToogleJobTalentsToogler}
               />
-              <JobBoxes jobTalentsToogler={this.state.jobTalentsToogler} dataArrow={this.state.dataArrow} />
-              {/* <ul>
-                {viewTest.map(test => (
-                  <li key={test.id}>{test.testName}</li>
-                ))}
-              </ul> */}
+              <JobBoxes jobTalentsToogler={this.state.jobTalentsToogler} jobs={jobs} />
             </div>
-          </Layout>
+          </MainLayout>
         </div>
       </div>
     );
@@ -63,25 +46,9 @@ class SearchPage extends React.Component {
 }
 
 SearchPage.propTypes = {
-  // viewTest: PropTypes.array.isRequired,
-  // fetchTest: PropTypes.func,
+  isAuthenticated: PropTypes.bool,
+  jobs: PropTypes.array,
+  user: PropTypes.object,
 };
 
-const mapStateToProps = state => {
-  return {
-    // viewTest: getTest(state),
-  };
-};
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      // fetchTest,
-    },
-    dispatch,
-  );
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SearchPage);
+export default searchContainer(SearchPage);

@@ -1,19 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class JobItem extends React.Component {
   render() {
+    const { item } = this.props;
+    const { title, description, promotion_description, promotion_title, user, created_at } = item;
+    const { full_name, image } = user;
+    const d = new Date();
+    const dayAgo = d.getDay(created_at);
     return (
       <div className="job-box-block">
         <div className="panel panel-default job-box">
           <div className="job-box-header flexbox justify-space-between">
             <div className="job-box-title">
-              <div className="post-date">6 days ago</div>
-              <div className="job-title">Looking for back end programmer</div>
+              <div className="post-date">{dayAgo} days ago</div>
+              <div className="job-title">{title}</div>
             </div>
             <div className="panel panel-default">
               <div className="flexbox justify-space-between">
                 <div className="job-box-photo-block">
-                  <div className="job-box-photo bg-cover circul-shape">
+                  <div
+                    className="job-box-photo bg-cover circul-shape"
+                    style={image.url && { backgroundImage: `url(${image.url})` }}
+                  >
                     <i className="notif" />
                   </div>
                 </div>
@@ -36,7 +45,7 @@ class JobItem extends React.Component {
                   <span className="rate-result">5.8</span>
                 </div>
               </div>
-              <div className="blue-color">Clifford Love</div>
+              <div className="blue-color">{full_name}</div>
             </div>
           </div>
           <div className="job-box-body">
@@ -64,10 +73,7 @@ class JobItem extends React.Component {
               </div>
             </div>
             <div className="job-box-deskr">
-              <div className="text">
-                {`Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw
-                Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks...`}
-              </div>
+              <div className="text">{description}</div>
               <div className="skill-tags-block clearfix">
                 <div className="skill-tag">HTML5</div>
                 <div className="skill-tag">Node.js</div>
@@ -77,7 +83,8 @@ class JobItem extends React.Component {
             </div>
           </div>
           <div className="job-box-footer flexbox justify-space-between">
-            <div className="additional-info blue-color">Math Home Tutoring</div>
+            <div className="additional-info blue-color"> {promotion_title}</div>
+            <div className="card-promotion-description one-row-angular-truncate">{promotion_description}</div>
             <button className="btn btn-blue btn-bold">Free</button>
           </div>
         </div>
@@ -220,5 +227,9 @@ class JobItem extends React.Component {
     );
   }
 }
+
+JobItem.propTypes = {
+  item: PropTypes.object,
+};
 
 export default JobItem;

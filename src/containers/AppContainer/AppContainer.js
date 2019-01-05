@@ -2,10 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { signUp, logout, login } from '../../reducers/auth/actions';
+import { signUp, logout, login, validateToken } from '../../reducers/auth/actions';
+import { getUserData, isAuthenticated } from '../../selectors';
 
 function appContainer(Component) {
   class AppContainer extends Component {
+    componentWillMount = () => {
+      validateToken();
+    };
+
     render() {
       return <Component {...this.props} />;
     }
@@ -14,12 +19,13 @@ function appContainer(Component) {
   AppContainer.propTypes = {
     isAuthenticated: PropTypes.bool,
     signUp: PropTypes.func,
+    user: PropTypes.object,
   };
 
   const mapStateToProps = state => {
     return {
-      isAuthenticated: state.authReducer.isAuthenticated,
-      user: state.authReducer.user,
+      isAuthenticated: isAuthenticated(state),
+      user: getUserData(state),
     };
   };
 

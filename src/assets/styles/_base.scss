@@ -1,36 +1,40 @@
-@import "vendor/normalize";
+@import 'vendor/normalize';
 
-@import "common/icons.scss";
-@import "common/font.scss";
-@import "reusable.scss";
-@import "header.scss";
-@import "common/buttons";
+@import 'common/icons.scss';
+@import 'common/font.scss';
+@import 'reusable.scss';
+@import 'header.scss';
+@import 'common/buttons';
 
-@import "overview.scss";
-@import "profile-styles.scss";
-@import "home-styles.scss";
-@import "post-job-styles.scss";
-@import "tallent-or-job-detail.scss";
-@import "FAQ-styles.scss";
-@import "404-styles.scss";
-@import "common/media";
+@import 'overview.scss';
+@import 'profile-styles.scss';
+@import 'home-styles.scss';
+@import 'post-job-styles.scss';
+@import 'tallent-or-job-detail.scss';
+@import 'FAQ-styles.scss';
+@import '404-styles.scss';
+@import 'common/media';
 
-html{
+html {
   position: relative;
   min-height: 100%;
 }
-body{
+body {
   margin: 0;
   padding: 0;
 }
-button{
-  &:active, &:focus{
+button {
+  &:active,
+  &:focus {
     outline: none;
   }
 }
-.hidden{
+.hidden {
   display: none;
 }
 .show {
-  display: inline-block!important;
+  display: inline-block !important;
+}
+input:focus {
+  outline: none;
 }

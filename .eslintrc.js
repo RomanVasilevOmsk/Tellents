@@ -18,9 +18,10 @@ module.exports = {
   env: {
     es6: true,
     node: true,
+    browser: true,
   },
   rules: {
-    'camelcase': [0, {'properties': 'never'}],
+    camelcase: [0, { properties: 'never' }],
     'no-useless-escape': 'warn',
     'no-undef': 'warn',
     'react/no-deprecated': 'off',
@@ -31,7 +32,7 @@ module.exports = {
   },
   settings: {
     react: {
-        version: "latest"
+      version: 'latest',
     },
-}
+  },
 };

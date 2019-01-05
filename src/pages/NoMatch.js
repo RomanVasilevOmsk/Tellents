@@ -1,9 +1,9 @@
 import React from 'react';
-import Layout from '../components/Layouts';
+import { MainLayout } from '../components/Layouts';
 
 const NoMatch = () => (
   <div className="wrapper err-404-page">
-    <Layout>
+    <MainLayout>
       <div className="err-404-wrapper">
         <div className="err-404-title bg-cover">
           <h2>404</h2>
@@ -11,7 +11,7 @@ const NoMatch = () => (
         <div className="err-404-content">
           <h2 className="blue-color">{`This page doesn't exist.`}</h2>
           <p>
-            Please return to the{' '}
+            Please return to the
             <a href="#" className="blue-color">
               previous page
             </a>
@@ -25,7 +25,7 @@ const NoMatch = () => (
           </a>
         </div>
       </div>
-    </Layout>
+    </MainLayout>
   </div>
 );
 
