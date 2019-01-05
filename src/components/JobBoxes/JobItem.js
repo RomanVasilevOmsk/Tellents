@@ -83,9 +83,11 @@ class JobItem extends React.Component {
             </div>
           </div>
           <div className="job-box-footer flexbox justify-space-between">
-            <div className="additional-info blue-color"> {promotion_title}</div>
-            <div className="card-promotion-description one-row-angular-truncate">{promotion_description}</div>
-            <button className="btn btn-blue btn-bold">Free</button>
+            <div>
+              <div className="additional-info blue-color"> {promotion_title}</div>
+              <div className="card-promotion-description one-row-angular-truncate">{promotion_description}</div>
+            </div>
+            <button className="btn btn-blue btn-skill-test btn-bold">Free</button>
           </div>
         </div>
 

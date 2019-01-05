@@ -17,12 +17,12 @@ export const Header = ({ user, logout, onOpenMobileMenu, isMobileMenuVisible }) 
     </div>
     <section className="nav-mobile flexbox justify-space-between">
       <section className="nav-tablet flexbox justify-space-center">
-        <FormHeaderSearch />
+        <FormHeaderSearch onSubmit={() => {}} />
         <MainNavigation />
       </section>
       <div className="user-box">
         <Notifications />
-        <Avatar user={user} />
+        <Avatar imgUrl={user.image.url} />
         <UserBoxDropDown logout={logout} user={user} />
       </div>
     </section>

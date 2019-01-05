@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import LeftSideBar from './LeftSidebar';
-import RightSidebar from './RightSidebar';
+import LeftSideBar from '../LeftSideBar';
+import RightSidebar from '../RightSidebar';
 import TellentsItem from './TellentsItem';
 import JobItem from './JobItem';
 import EmptyJobs from '../../assets/images/jobs@2x.png';

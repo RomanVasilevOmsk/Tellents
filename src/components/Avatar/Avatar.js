@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class Avatar extends Component {
-  render() {
-    const { url } = this.props.user.image;
-    console.log('img', this.props);
-    return (
-      <div className="user-photo" style={url ? { backgroundImage: `url(${url})` } : ''}>
-        <i className="notif" />
-      </div>
-    );
-  }
-}
+export const Avatar = ({ imgUrl }) => (
+  <div className="user-photo" style={imgUrl ? { backgroundImage: `url(${imgUrl})` } : ''}>
+    <i className="notif" />
+  </div>
+);
 
 Avatar.propTypes = {
-  user: PropTypes.object,
+  imgUrl: PropTypes.string,
 };
 
 export default Avatar;
