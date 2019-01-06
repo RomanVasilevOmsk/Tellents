@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { RadioGroup, Radio } from 'react-radio-group';
 import PropTypes from 'prop-types';
-class SideBarToogler extends React.Component {
+
+class SideBarToogler extends Component {
   handleChangeToogler = value => {
     this.props.onChangeJobTalentsToogler(value);
   };

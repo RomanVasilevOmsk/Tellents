@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class JobItem extends React.Component {
+class JobsListItem extends Component {
   render() {
     const { item } = this.props;
     const { title, description, promotion_description, promotion_title, user, created_at } = item;
@@ -230,8 +230,8 @@ class JobItem extends React.Component {
   }
 }
 
-JobItem.propTypes = {
+JobsListItem.propTypes = {
   item: PropTypes.object,
 };
 
-export default JobItem;
+export default JobsListItem;

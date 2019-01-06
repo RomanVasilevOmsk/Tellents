@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class TellentsItem extends React.Component {
+class TellentsListItem extends Component {
   render() {
+    const { item } = this.props;
+    // const { title, description, promotion_description, promotion_title, user, created_at } = item;
+    // const { full_name, image } = user;
     return (
       <div className="job-box-block">
         <div className="panel panel-default job-box awarded">
@@ -192,7 +196,7 @@ class TellentsItem extends React.Component {
                       <span className="job-title">PSD to HTML</span>
                       <span className="feedback-text">
                         {`Another bang up job! Clifford is the most dependable web design resource I've worked with, and
-                        I've worked with... many!`}
+                      I've worked with... many!`}
                       </span>
                     </div>
                   </div>
@@ -212,7 +216,7 @@ class TellentsItem extends React.Component {
                       <span className="job-title">PSD to HTML</span>
                       <span className="feedback-text">
                         {`Another bang up job! Clifford is the most dependable web design resource I've worked with, and
-                        I've worked with... many!`}
+                      I've worked with... many!`}
                       </span>
                     </div>
                   </div>
@@ -232,7 +236,7 @@ class TellentsItem extends React.Component {
                       <span className="job-title">PSD to HTML</span>
                       <span className="feedback-text">
                         {`Another bang up job! Clifford is the most dependable web design resource I've worked with, and
-                        I've worked with... many!`}
+                      I've worked with... many!`}
                       </span>
                     </div>
                   </div>
@@ -267,4 +271,8 @@ class TellentsItem extends React.Component {
   }
 }
 
-export default TellentsItem;
+TellentsListItem.propTypes = {
+  item: PropTypes.object,
+};
+
+export default TellentsListItem;

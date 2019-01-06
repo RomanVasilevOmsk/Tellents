@@ -24,7 +24,7 @@ class SearchPage extends React.Component {
   };
 
   render() {
-    const { jobs, user } = this.props;
+    const { jobs, user, users } = this.props;
     return (
       <div className="home-page">
         <div className="wrapper">
@@ -36,7 +36,7 @@ class SearchPage extends React.Component {
                 onChangeJobTalentsToogler={this.onChangeJobTalentsToogler}
                 onToogleJobTalentsToogler={this.onToogleJobTalentsToogler}
               />
-              <JobBoxes jobTalentsToogler={this.state.jobTalentsToogler} jobs={jobs} />
+              <JobBoxes jobTalentsToogler={this.state.jobTalentsToogler} jobs={jobs} users={users} />
             </div>
           </MainLayout>
         </div>
@@ -49,6 +49,7 @@ SearchPage.propTypes = {
   isAuthenticated: PropTypes.bool,
   jobs: PropTypes.array,
   user: PropTypes.object,
+  users: PropTypes.array,
 };
 
 export default searchContainer(SearchPage);

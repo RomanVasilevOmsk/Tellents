@@ -5,15 +5,17 @@ import { bindActionCreators } from 'redux';
 import queryString from 'query-string';
 import { signUp, logout, login } from '../../reducers/auth/actions';
 import { fetchJobs } from '../../reducers/jobs/actions';
-import { getUserData, getJobs, isAuthenticated } from '../../selectors';
+import { fetchTellents } from '../../reducers/tellents/actions';
+import { getUserData, getJobs, getTellents, isAuthenticated } from '../../selectors';
 
 function searchContainer(Component) {
   class SearchContainer extends Component {
     componentWillMount = () => {
-      const { isAuthenticated, fetchJobs } = this.props;
+      const { isAuthenticated, fetchJobs, fetchTellents } = this.props;
       const parsed = queryString.parse(this.props.location.search);
       if (isAuthenticated) {
-        return fetchJobs(1, parsed);
+        fetchJobs(1, parsed);
+        fetchTellents(1, parsed);
       }
     };
 
@@ -26,6 +28,7 @@ function searchContainer(Component) {
     isAuthenticated: PropTypes.bool,
     signUp: PropTypes.func,
     fetchJobs: PropTypes.func,
+    fetchTellents: PropTypes.func,
     location: PropTypes.object,
   };
 
@@ -34,11 +37,12 @@ function searchContainer(Component) {
       isAuthenticated: isAuthenticated(state),
       user: getUserData(state),
       jobs: getJobs(state),
+      users: getTellents(state),
     };
   };
 
   const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ signUp, logout, login, fetchJobs }, dispatch);
+    return bindActionCreators({ signUp, logout, login, fetchJobs, fetchTellents }, dispatch);
   };
 
   return connect(

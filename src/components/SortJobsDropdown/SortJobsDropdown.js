@@ -13,9 +13,11 @@ class SortJobsDropdown extends React.Component {
   state = {
     selectedOption: null,
   };
+
   handleChange = selectedOption => {
     this.setState({ selectedOption });
   };
+
   render() {
     return (
       <div className="sort-nav">

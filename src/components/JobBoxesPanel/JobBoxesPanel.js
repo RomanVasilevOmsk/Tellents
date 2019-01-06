@@ -1,6 +1,7 @@
-import React from 'react';
-import SortJobsDropdown from './SortJobsDropdown';
-class JobBoxesPanel extends React.Component {
+import React, { Component } from 'react';
+import SortJobsDropdown from '../SortJobsDropdown';
+
+class JobBoxesPanel extends Component {
   render() {
     return (
       <div className="col-xs-10">
