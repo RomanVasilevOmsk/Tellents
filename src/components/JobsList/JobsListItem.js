@@ -2,86 +2,111 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class JobsListItem extends Component {
-  render() {
-    const { item } = this.props;
-    const { title, description, promotion_description, promotion_title, user, created_at } = item;
-    const { full_name, image } = user;
+  getHeader = (created, title, imageUrl, name, rate) => {
     const d = new Date();
-    const dayAgo = d.getDay(created_at);
+    const dayAgo = d.getDay(created);
+    return (
+      <div className="job-box-header flexbox justify-space-between">
+        <div className="job-box-title">
+          <div className="post-date">{dayAgo} days ago</div>
+          <div className="job-title">{title}</div>
+        </div>
+        <div className="panel panel-default">
+          <div className="flexbox justify-space-between">
+            <div className="job-box-photo-block">
+              <div
+                className="job-box-photo bg-cover circul-shape"
+                style={imageUrl && { backgroundImage: `url(${imageUrl})` }}
+              >
+                <i className="notif" />
+              </div>
+            </div>
+            <div className="award">
+              <span className="icon icon-badge-flat">
+                <span className="path1" />
+                <span className="path2" />
+                <span className="path3" />
+                <span className="path4" />
+                <span className="path5" />
+                <span className="path6" />
+                <span className="path7" />
+                <span className="path8" />
+                <span className="path9" />
+                <span className="path10" />
+              </span>
+            </div>
+            <div className="job-box-rate">
+              <span className="icon icon-star-full" />
+              <span className="rate-result">{rate ? `${rate}` : 'N/A'}</span>
+            </div>
+          </div>
+          <div className="blue-color">{name}</div>
+        </div>
+      </div>
+    );
+  };
+
+  getBody = description => {
+    return (
+      <div className="job-box-body">
+        <div className="job-box-tips flexbox justify-space-between">
+          <div className="tip">
+            <span className="icon icon-location" />
+            <span className="text">Aus..</span>
+          </div>
+          <div className="tip">
+            <span className="icon icon-clock-1" />
+            <span className="text">&#62; 30h</span>
+          </div>
+          <div className="tip">
+            <span className="icon icon-award" />
+            <span className="text">Jun</span>
+          </div>
+          <div className="tip">
+            <span className="icon icon-timer" />
+            <span className="text">110 h/2 J</span>
+          </div>
+
+          <div className="tip">
+            <span className="icon icon-wallet" />
+            <span className="text">24$/h</span>
+          </div>
+        </div>
+        <div className="job-box-deskr">
+          <div className="text">{description}</div>
+          <div className="skill-tags-block clearfix">
+            <div className="skill-tag">HTML5</div>
+            <div className="skill-tag">Node.js</div>
+            <div className="skill-tag">CSS3</div>
+            <div className="skill-tag">PHP</div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  getFooter = () => {};
+
+  render() {
+    const {
+      title,
+      description,
+      promotion_description,
+      promotion_title,
+      created_at,
+      skill_tags,
+      user: {
+        full_name,
+        total_rate,
+        image: { url },
+      },
+    } = this.props.item;
+
     return (
       <div className="job-box-block">
         <div className="panel panel-default job-box">
-          <div className="job-box-header flexbox justify-space-between">
-            <div className="job-box-title">
-              <div className="post-date">{dayAgo} days ago</div>
-              <div className="job-title">{title}</div>
-            </div>
-            <div className="panel panel-default">
-              <div className="flexbox justify-space-between">
-                <div className="job-box-photo-block">
-                  <div
-                    className="job-box-photo bg-cover circul-shape"
-                    style={image.url && { backgroundImage: `url(${image.url})` }}
-                  >
-                    <i className="notif" />
-                  </div>
-                </div>
-                <div className="award">
-                  <span className="icon icon-badge-flat">
-                    <span className="path1" />
-                    <span className="path2" />
-                    <span className="path3" />
-                    <span className="path4" />
-                    <span className="path5" />
-                    <span className="path6" />
-                    <span className="path7" />
-                    <span className="path8" />
-                    <span className="path9" />
-                    <span className="path10" />
-                  </span>
-                </div>
-                <div className="job-box-rate">
-                  <span className="icon icon-star-full" />
-                  <span className="rate-result">5.8</span>
-                </div>
-              </div>
-              <div className="blue-color">{full_name}</div>
-            </div>
-          </div>
-          <div className="job-box-body">
-            <div className="job-box-tips flexbox justify-space-between">
-              <div className="tip">
-                <span className="icon icon-location" />
-                <span className="text">Aus..</span>
-              </div>
-              <div className="tip">
-                <span className="icon icon-clock-1" />
-                <span className="text">&#62; 30h</span>
-              </div>
-              <div className="tip">
-                <span className="icon icon-award" />
-                <span className="text">Jun</span>
-              </div>
-              <div className="tip">
-                <span className="icon icon-timer" />
-                <span className="text">110 h/2 J</span>
-              </div>
-
-              <div className="tip">
-                <span className="icon icon-wallet" />
-                <span className="text">24$/h</span>
-              </div>
-            </div>
-            <div className="job-box-deskr">
-              <div className="text">{description}</div>
-              <div className="skill-tags-block clearfix">
-                <div className="skill-tag">HTML5</div>
-                <div className="skill-tag">Node.js</div>
-                <div className="skill-tag">CSS3</div>
-                <div className="skill-tag">PHP</div>
-              </div>
-            </div>
-          </div>
+          {this.getHeader(created_at, title, url, full_name, total_rate)}
+          {this.getBody(description)}
           <div className="job-box-footer flexbox justify-space-between">
             <div>
               <div className="additional-info blue-color"> {promotion_title}</div>

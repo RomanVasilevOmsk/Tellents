@@ -18,7 +18,7 @@ function searchContainer(Component) {
       const { isAuthenticated, fetchJobs, fetchTellents } = this.props;
       const { parsed } = this.state;
       if (isAuthenticated) {
-        fetchJobs(1, parsed);
+        fetchJobs(2, parsed);
         fetchTellents(1, parsed);
       }
     };
