@@ -4,7 +4,7 @@ import JobsListItem from './JobsListItem';
 import uuid from 'uuid/v4';
 import EmptyJobs from '../../assets/images/jobs@2x.png';
 
-export const JobsList = ({ jobs }) => (
+export const JobsList = ({ jobs, handleLoadMoreJobs }) => (
   <div className="col-xs-12">
     {jobs ? (
       <Fragment>
@@ -14,7 +14,9 @@ export const JobsList = ({ jobs }) => (
           ))}
         </div>
         <div className="job-boxes-footer">
-          <button className="btn btn-bg-transparent blue-color btn-bold">Load more</button>
+          <button className="btn btn-bg-transparent blue-color btn-bold" onClick={handleLoadMoreJobs}>
+            Load more
+          </button>
         </div>
       </Fragment>
     ) : (
@@ -29,6 +31,7 @@ export const JobsList = ({ jobs }) => (
 
 JobsList.propTypes = {
   jobs: PropTypes.array,
+  handleLoadMoreJobs: PropTypes.func,
 };
 
 export default JobsList;

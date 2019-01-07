@@ -4,7 +4,7 @@ import TellentsListItem from './TellentsListItem';
 import uuid from 'uuid/v4';
 import EmptyTellents from '../../assets/images/tallents@2x.png';
 
-export const TellentsList = ({ users }) => (
+export const TellentsList = ({ users, handleLoadMoreTellents }) => (
   <div className="col-xs-12">
     {users ? (
       <Fragment>
@@ -14,7 +14,9 @@ export const TellentsList = ({ users }) => (
           ))}
         </div>
         <div className="job-boxes-footer">
-          <button className="btn btn-bg-transparent blue-color btn-bold">Load more</button>
+          <button className="btn btn-bg-transparent blue-color btn-bold" onClick={handleLoadMoreTellents}>
+            Load more
+          </button>
         </div>
       </Fragment>
     ) : (
@@ -29,6 +31,7 @@ export const TellentsList = ({ users }) => (
 
 TellentsList.propTypes = {
   users: PropTypes.array,
+  handleLoadMoreTellents: PropTypes.func,
 };
 
 export default TellentsList;

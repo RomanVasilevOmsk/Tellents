@@ -24,7 +24,7 @@ class SearchPage extends React.Component {
   };
 
   render() {
-    const { jobs, user, users } = this.props;
+    const { jobs, user, users, handleLoadMoreJobs, handleLoadMoreTellents } = this.props;
     return (
       <div className="home-page">
         <div className="wrapper">
@@ -36,7 +36,13 @@ class SearchPage extends React.Component {
                 onChangeJobTalentsToogler={this.onChangeJobTalentsToogler}
                 onToogleJobTalentsToogler={this.onToogleJobTalentsToogler}
               />
-              <JobBoxes jobTalentsToogler={this.state.jobTalentsToogler} jobs={jobs} users={users} />
+              <JobBoxes
+                jobTalentsToogler={this.state.jobTalentsToogler}
+                jobs={jobs}
+                users={users}
+                handleLoadMoreJobs={handleLoadMoreJobs}
+                handleLoadMoreTellents={handleLoadMoreTellents}
+              />
             </div>
           </MainLayout>
         </div>
@@ -50,6 +56,8 @@ SearchPage.propTypes = {
   jobs: PropTypes.array,
   user: PropTypes.object,
   users: PropTypes.array,
+  handleLoadMoreJobs: PropTypes.func,
+  handleLoadMoreTellents: PropTypes.func,
 };
 
 export default searchContainer(SearchPage);
