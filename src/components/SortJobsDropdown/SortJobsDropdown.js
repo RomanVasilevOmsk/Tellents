@@ -19,13 +19,14 @@ class SortJobsDropdown extends React.Component {
   };
 
   render() {
+    const { result } = this.props;
     return (
       <div className="sort-nav">
         <span className="sort-nav-title">Sort By</span>
         <Select defaultValue={options[0]} isSearchable={false} onChange={this.handleChange} options={options} />
         <span className="sort-result">
           Result:
-          <span className="sort-result-numb">25</span>
+          <span className="sort-result-numb">{result}</span>
         </span>
       </div>
     );
@@ -33,8 +34,7 @@ class SortJobsDropdown extends React.Component {
 }
 
 SortJobsDropdown.propTypes = {
-  onOpenDropDown: PropTypes.func,
-  isDropDownOpened: PropTypes.bool,
+  result: PropTypes.number,
 };
 
 export default SortJobsDropdown;

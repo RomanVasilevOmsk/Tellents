@@ -23,8 +23,18 @@ class SearchPage extends React.Component {
     }
   };
 
+  resultQuery = value => {
+    if (value === 'talents') {
+      return this.props.metaUsers.total_pages;
+    } else {
+      return this.props.metaJobs.total_pages;
+    }
+  };
+
   render() {
+    const { jobTalentsToogler } = this.state;
     const { jobs, user, users, handleLoadMoreJobs, handleLoadMoreTellents } = this.props;
+    const result = this.resultQuery(jobTalentsToogler);
     return (
       <div className="home-page">
         <div className="wrapper">
@@ -32,6 +42,7 @@ class SearchPage extends React.Component {
             <div className="container-fluid">
               <ContentHeader user={user} />
               <JobBoxesHeader
+                result={result}
                 jobTalentsToogler={this.state.jobTalentsToogler}
                 onChangeJobTalentsToogler={this.onChangeJobTalentsToogler}
                 onToogleJobTalentsToogler={this.onToogleJobTalentsToogler}
@@ -56,6 +67,8 @@ SearchPage.propTypes = {
   jobs: PropTypes.array,
   user: PropTypes.object,
   users: PropTypes.array,
+  metaJobs: PropTypes.object,
+  metaUsers: PropTypes.object,
   handleLoadMoreJobs: PropTypes.func,
   handleLoadMoreTellents: PropTypes.func,
 };

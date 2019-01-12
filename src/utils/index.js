@@ -4,6 +4,16 @@ Auth.configure({
   apiUrl: 'https://floating-atoll-63112.herokuapp.com/api',
 });
 
+export const isValue = value => value || 'N/A';
+
+export const toCutText = (value, size) => {
+  if (value.length > size) {
+    return value.slice(0, size) + '...';
+  } else {
+    return value;
+  }
+};
+
 export const validationRules = {
   required: value => {
     return !value ? ['Required'] : undefined;

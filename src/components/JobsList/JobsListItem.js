@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import uuid from 'uuid/v4';
+import { isValue, toCutText } from '../../utils';
 
 class JobsListItem extends Component {
   getHeader = (created, title, imageUrl, name, rate) => {
-    const d = new Date();
-    const dayAgo = d.getDay(created);
+    const dayAgo = moment(created).fromNow();
     return (
       <div className="job-box-header flexbox justify-space-between">
         <div className="job-box-title">
-          <div className="post-date">{dayAgo} days ago</div>
-          <div className="job-title">{title}</div>
+          <div className="post-date">{dayAgo}</div>
+          <div className="job-title">{toCutText(title, 34)}</div>
         </div>
         <div className="panel panel-default">
           <div className="flexbox justify-space-between">
@@ -38,7 +39,7 @@ class JobsListItem extends Component {
             </div>
             <div className="job-box-rate">
               <span className="icon icon-star-full" />
-              <span className="rate-result">{rate ? `${rate}` : 'N/A'}</span>
+              <span className="rate-result">{isValue(rate)}</span>
             </div>
           </div>
           <div className="blue-color">{name}</div>
@@ -47,34 +48,34 @@ class JobsListItem extends Component {
     );
   };
 
-  getBody = (description, level, time_type, skills, period, periodType) => {
+  getBody = (description, level, time_type, skills, period, periodType, commitment, country) => {
     return (
       <div className="job-box-body">
         <div className="job-box-tips flexbox justify-space-between">
           <div className="tip">
             <span className="icon icon-location" />
-            <span className="text">Aus..</span>
+            <span className="text">{isValue(country)}</span>
           </div>
           <div className="tip">
             <span className="icon icon-clock-1" />
-            <span className="text">&#62; 30h</span>
+            <span className="text">{this.commitmentValue(commitment)}</span>
           </div>
           <div className="tip">
             <span className="icon icon-award" />
-            <span className="text">{level || 'N/A'}</span>
+            <span className="text">{isValue(level)}</span>
           </div>
           <div className="tip">
             <span className="icon icon-timer" />
-            <span className="text">{`${period} ${periodType}` || 'N/A'}</span>
+            <span className="text">{isValue(period + periodType)}</span>
           </div>
 
           <div className="tip">
             <span className="icon icon-wallet" />
-            <span className="text">{time_type || 'N/A'}</span>
+            <span className="text">{isValue(time_type)}</span>
           </div>
         </div>
         <div className="job-box-deskr">
-          <div className="text">{description}</div>
+          <div className="text">{toCutText(isValue(description), 107)}</div>
           <div className="skill-tags-block clearfix">
             {skills.map(item => (
               <div key={uuid()} className="skill-tag">
@@ -87,177 +88,217 @@ class JobsListItem extends Component {
     );
   };
 
-  getFooter = () => {};
+  getFooter = (title, description) => {
+    return (
+      <div className="job-box-footer flexbox justify-space-between">
+        <div className="job-box-footer__inner">
+          <div className="additional-info blue-color">{title || 'There is no skill test'}</div>
+          <div className="card-promotion-description one-row-angular-truncate">{description}</div>
+        </div>
+        <button className="btn btn-blue btn-skill-test btn-bold">Free</button>
+      </div>
+    );
+  };
+
+  commitmentValue = commitment => {
+    if (commitment === 'per_week_up_to_30') {
+      return '< 30h';
+    }
+    if (commitment === 'per_week_more_than_30') {
+      return '> 30h';
+    }
+    if (commitment === 'per_week_10') {
+      return '10h';
+    }
+    if (commitment === 'decide_later') {
+      return isValue();
+    } else {
+      return isValue();
+    }
+  };
 
   render() {
     const {
-      title,
-      description,
-      promotion_description,
-      promotion_title,
-      created_at,
-      time_type,
-      period,
-      period_type,
-      level,
-      skill_tags,
-      user: {
-        full_name,
-        total_rate,
-        image: { url },
+      isDropDownOpened,
+      onOpenDropDown,
+      onCloseDropDown,
+      ev,
+      item: {
+        title,
+        description,
+        promotion_description,
+        promotion_title,
+        created_at,
+        time_type,
+        period,
+        period_type,
+        level,
+        id,
+        skill_tags,
+        commitment,
+        user: {
+          full_name,
+          total_rate,
+          country,
+          image: { url },
+        },
       },
-    } = this.props.item;
+    } = this.props;
+    const imageUrl = url;
     const levelUcFirst = level && (level[0].toUpperCase() + level.slice(1)).slice(0, 3);
     const timeType = time_type && (time_type[0].toUpperCase() + time_type.slice(1)).replace(/_+/g, ' ');
     const periodType = period_type && period_type[0].toUpperCase() + period_type.slice(1).slice(0, 0);
+
     return (
       <div className="job-box-block">
-        <div className="panel panel-default job-box">
-          {this.getHeader(created_at, title, url, full_name, total_rate)}
-          {this.getBody(description, levelUcFirst, timeType, skill_tags, period, periodType)}
-          <div className="job-box-footer flexbox justify-space-between">
-            <div className="job-box-footer__inner">
-              <div className="additional-info blue-color">{promotion_title || 'There is no skill test'}</div>
-              <div className="card-promotion-description one-row-angular-truncate">{promotion_description}</div>
-            </div>
-            <button className="btn btn-blue btn-skill-test btn-bold">Free</button>
-          </div>
+        <div className="panel panel-default job-box" onClick={() => onOpenDropDown(id)}>
+          {this.getHeader(created_at, title, imageUrl, full_name, total_rate)}
+          {this.getBody(description, levelUcFirst, timeType, skill_tags, period, periodType, commitment, country)}
+          {this.getFooter(promotion_title, promotion_description)}
         </div>
 
-        <div className="caret-block">
-          <span className="caret-top" />
-        </div>
-        <div className="panel panel-default job-box-details">
-          <button className="btn btn-bg-transparent close-btn icon-btn">
-            <span className="glyphicon glyphicon-remove" />
-          </button>
-          <div className="flexbox justify-space-between">
-            <div className="about-block-wrapper">
-              <div className="photo-block">
-                <div className="flexbox justify-space-between">
-                  <div className="award">
-                    <span className="icon icon-badge-solid" />
+        {isDropDownOpened && (
+          <Fragment>
+            <div className="caret-block">
+              <span className="caret-top" />
+            </div>
+            <div className={`panel panel-default job-box-details job-box-details-${ev ? 'right' : 'left'}`}>
+              <button className="btn btn-bg-transparent close-btn icon-btn">
+                <span className="glyphicon glyphicon-remove" onClick={onCloseDropDown} />
+              </button>
+              <div className="flexbox justify-space-between">
+                <div className="about-block-wrapper">
+                  <div className="photo-block">
+                    <div className="flexbox justify-space-between">
+                      <div className="award">
+                        <span className="icon icon-badge-solid" />
+                      </div>
+                      <div
+                        className="job-box-photo bg-cover circul-shape"
+                        style={imageUrl && { backgroundImage: `url(${imageUrl})` }}
+                      />
+                      <div className="job-box-rate">
+                        <span className="icon icon-star-full" />
+                        <span className="rate-result">5.8</span>
+                      </div>
+                    </div>
+                    <div className="job-box-title">
+                      <div className="job-box-name blue-color">{full_name || 'User'}</div>
+                    </div>
                   </div>
-                  <div className="job-box-photo bg-cover circul-shape" />
-                  <div className="job-box-rate">
-                    <span className="icon icon-star-full" />
-                    <span className="rate-result">5.8</span>
-                  </div>
-                </div>
-                <div className="job-box-title">
-                  <div className="job-box-name blue-color">Clifford Love</div>
-                </div>
-              </div>
 
-              <div className="info-block">
-                <div className="title">$7,832 Total Spent</div>
-              </div>
-              <div className="info-block">
-                <div className="title">30 Samples / 20 jobs</div>
-              </div>
-              <div className="info-block">
-                <div className="title">Languages</div>
-                <div className="text">
-                  English: <span>fluent</span>; Russian: <span>native</span>
+                  <div className="info-block">
+                    <div className="title">$7,832 Total Spent</div>
+                  </div>
+                  <div className="info-block">
+                    <div className="title">30 Samples / 20 jobs</div>
+                  </div>
+                  <div className="info-block">
+                    <div className="title">Languages</div>
+                    <div className="text">
+                      English: <span>fluent</span>; Russian: <span>native</span>
+                    </div>
+                  </div>
+                  <div className="info-block">
+                    <div className="title">Place of Work</div>
+                    <div className="text">Online</div>
+                  </div>
+                  <div className="info-block info-block--btns">
+                    <button className="btn btn-blue-border btn-bold btn-blue-hover btn-with-icon" type="button">
+                      <div className="button-content">
+                        <span className="icon icon-clipboard" />
+                        <span className="btn-text">Send a bid</span>
+                      </div>
+                    </button>
+                    <button className="btn btn-blue-border btn-bold btn-blue-hover btn-with-icon" type="button">
+                      <div className="button-content">
+                        <span className="icon icon-output" />
+                        <span className="btn-text">More Info</span>
+                      </div>
+                    </button>
+                    <button className="btn btn-blue-border btn-bold btn-blue-hover btn-with-icon" type="button">
+                      <div className="button-content">
+                        <span className="icon icon-comment" />
+                        <span className="btn-text">Message</span>
+                      </div>
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="info-block">
-                <div className="title">Place of Work</div>
-                <div className="text">Online</div>
-              </div>
-              <div className="info-block info-block--btns">
-                <button className="btn btn-blue-border btn-bold btn-blue-hover btn-with-icon" type="button">
-                  <div className="button-content">
-                    <span className="icon icon-clipboard" />
-                    <span className="btn-text">Send a bid</span>
+                <div className="job-details-right">
+                  <div className="job-details-right-header flexbox">
+                    <div className="likes flexbox">
+                      <span className="icon icon-shape" />
+                      <ul className="likes-list list-unstyled">
+                        <li className="like-item like-item--1 bg-cover circul-shape" />
+                        <li className="like-item like-item--2 bg-cover circul-shape" />
+                        <li className="like-item like-item--3 bg-cover circul-shape" />
+                        <li className="like-item like-item--1 bg-cover circul-shape" />
+                      </ul>
+                    </div>
+                    <div className="stat flexbox justify-space-center flex-wrap">
+                      <div className="stat-block">
+                        <span className="icon icon-tag" />
+                        <span className="stat-title blue-color">FIXED</span>
+                        <span className="stat-info">$200</span>
+                      </div>
+                      <div className="stat-block">
+                        <span className="icon icon-comments" />
+                        <span className="stat-title blue-color">RESPONSIVE</span>
+                        <span className="stat-info">Fair</span>
+                      </div>
+                      <div className="stat-block">
+                        <span className="icon icon-accounts" />
+                        <span className="stat-title blue-color">BUDGET</span>
+                        <span className="stat-info">$1000</span>
+                      </div>
+                      <div className="stat-block">
+                        <span className="icon icon-clock-1" />
+                        <span className="stat-title blue-color">COMPLETE</span>
+                        <span className="stat-info">5</span>
+                      </div>
+                    </div>
                   </div>
-                </button>
-                <button className="btn btn-blue-border btn-bold btn-blue-hover btn-with-icon" type="button">
-                  <div className="button-content">
-                    <span className="icon icon-output" />
-                    <span className="btn-text">More Info</span>
+                  <div className="job-details-right-body">
+                    <div className="job-details-descr">
+                      <div className="job-title">Looking for back end programmer</div>
+                      <div className="job-descr-text">
+                        <p>
+                          Experience Level: Expert Description of requirements/features: Looking for experts at coding
+                          in Wordpress for Mobile use.
+                        </p>
+                        <p>
+                          Must be excellent at design/frontend/backend programming in the popular programming languages.
+                          You will combine elements from our current with a modified theme site on the Wordpress
+                          platform.
+                        </p>
+                        <p>The new site will be responsive/mobile.</p>
+                        <p>
+                          The new site should load quickly and be user friendly on Mac, PC, Android phone/tablet, Apple
+                          phone/tablet and Windows phone/tablet, Chrome, IE, Windows, Opera and Firefox browsers. Once
+                          these items are complete, if things go well we will hire your company as a site administrator
+                          on an hourly basis (performing changes when required). Your company should have excellent and
+                          excellent rating and feedback. You should be able to quickly complete assignments. Please
+                          submit your website portfolio (links of sites you have created).
+                        </p>
+                        <p>
+                          Make sure all links you submit are working links (not dead links). IMPORTANT: Please DO NOT
+                          submit websites you have not created. This will disqualify you. Please be prepared to show us
+                          proof of the work you have performed on all websites you have created.
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </button>
-                <button className="btn btn-blue-border btn-bold btn-blue-hover btn-with-icon" type="button">
-                  <div className="button-content">
-                    <span className="icon icon-comment" />
-                    <span className="btn-text">Message</span>
+                  <div className="other-details">
+                    <div className="panel flexbox justify-space-between panel-blue">
+                      <div className="other-title">Math Home Tutoring</div>
+                      <span className="btn btn-blue-border btn-bold">Free</span>
+                    </div>
                   </div>
-                </button>
+                </div>
               </div>
             </div>
-            <div className="job-details-right">
-              <div className="job-details-right-header flexbox">
-                <div className="likes flexbox">
-                  <span className="icon icon-shape" />
-                  <ul className="likes-list list-unstyled">
-                    <li className="like-item like-item--1 bg-cover circul-shape" />
-                    <li className="like-item like-item--2 bg-cover circul-shape" />
-                    <li className="like-item like-item--3 bg-cover circul-shape" />
-                    <li className="like-item like-item--1 bg-cover circul-shape" />
-                  </ul>
-                </div>
-                <div className="stat flexbox justify-space-center flex-wrap">
-                  <div className="stat-block">
-                    <span className="icon icon-tag" />
-                    <span className="stat-title blue-color">FIXED</span>
-                    <span className="stat-info">$200</span>
-                  </div>
-                  <div className="stat-block">
-                    <span className="icon icon-comments" />
-                    <span className="stat-title blue-color">RESPONSIVE</span>
-                    <span className="stat-info">Fair</span>
-                  </div>
-                  <div className="stat-block">
-                    <span className="icon icon-accounts" />
-                    <span className="stat-title blue-color">BUDGET</span>
-                    <span className="stat-info">$1000</span>
-                  </div>
-                  <div className="stat-block">
-                    <span className="icon icon-clock-1" />
-                    <span className="stat-title blue-color">COMPLETE</span>
-                    <span className="stat-info">5</span>
-                  </div>
-                </div>
-              </div>
-              <div className="job-details-right-body">
-                <div className="job-details-descr">
-                  <div className="job-title">Looking for back end programmer</div>
-                  <div className="job-descr-text">
-                    <p>
-                      Experience Level: Expert Description of requirements/features: Looking for experts at coding in
-                      Wordpress for Mobile use.
-                    </p>
-                    <p>
-                      Must be excellent at design/frontend/backend programming in the popular programming languages. You
-                      will combine elements from our current with a modified theme site on the Wordpress platform.
-                    </p>
-                    <p>The new site will be responsive/mobile.</p>
-                    <p>
-                      The new site should load quickly and be user friendly on Mac, PC, Android phone/tablet, Apple
-                      phone/tablet and Windows phone/tablet, Chrome, IE, Windows, Opera and Firefox browsers. Once these
-                      items are complete, if things go well we will hire your company as a site administrator on an
-                      hourly basis (performing changes when required). Your company should have excellent and excellent
-                      rating and feedback. You should be able to quickly complete assignments. Please submit your
-                      website portfolio (links of sites you have created).
-                    </p>
-                    <p>
-                      Make sure all links you submit are working links (not dead links). IMPORTANT: Please DO NOT submit
-                      websites you have not created. This will disqualify you. Please be prepared to show us proof of
-                      the work you have performed on all websites you have created.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="other-details">
-                <div className="panel flexbox justify-space-between panel-blue">
-                  <div className="other-title">Math Home Tutoring</div>
-                  <span className="btn btn-blue-border btn-bold">Free</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          </Fragment>
+        )}
       </div>
     );
   }
@@ -265,6 +306,10 @@ class JobsListItem extends Component {
 
 JobsListItem.propTypes = {
   item: PropTypes.object,
+  ev: PropTypes.bool,
+  isDropDownOpened: PropTypes.bool,
+  onCloseDropDown: PropTypes.func,
+  onOpenDropDown: PropTypes.func,
 };
 
 export default JobsListItem;

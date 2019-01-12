@@ -7,7 +7,8 @@ const dropDown = WrappedComponent => {
       isDropDownOpened: false,
     };
     openDropDown = () => {
-      this.setState({ isDropDownOpened: !this.state.isDropDownOpened });
+      const { isDropDownOpened } = this.state;
+      this.setState({ isDropDownOpened: !isDropDownOpened });
     };
 
     render() {
