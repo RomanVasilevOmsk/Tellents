@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import uuid from 'uuid/v4';
 
 class JobsListItem extends Component {
   getHeader = (created, title, imageUrl, name, rate) => {
@@ -46,7 +47,7 @@ class JobsListItem extends Component {
     );
   };
 
-  getBody = description => {
+  getBody = (description, level, time_type, skills, period, periodType) => {
     return (
       <div className="job-box-body">
         <div className="job-box-tips flexbox justify-space-between">
@@ -60,25 +61,26 @@ class JobsListItem extends Component {
           </div>
           <div className="tip">
             <span className="icon icon-award" />
-            <span className="text">Jun</span>
+            <span className="text">{level || 'N/A'}</span>
           </div>
           <div className="tip">
             <span className="icon icon-timer" />
-            <span className="text">110 h/2 J</span>
+            <span className="text">{`${period} ${periodType}` || 'N/A'}</span>
           </div>
 
           <div className="tip">
             <span className="icon icon-wallet" />
-            <span className="text">24$/h</span>
+            <span className="text">{time_type || 'N/A'}</span>
           </div>
         </div>
         <div className="job-box-deskr">
           <div className="text">{description}</div>
           <div className="skill-tags-block clearfix">
-            <div className="skill-tag">HTML5</div>
-            <div className="skill-tag">Node.js</div>
-            <div className="skill-tag">CSS3</div>
-            <div className="skill-tag">PHP</div>
+            {skills.map(item => (
+              <div key={uuid()} className="skill-tag">
+                {item.name}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -94,6 +96,10 @@ class JobsListItem extends Component {
       promotion_description,
       promotion_title,
       created_at,
+      time_type,
+      period,
+      period_type,
+      level,
       skill_tags,
       user: {
         full_name,
@@ -101,15 +107,17 @@ class JobsListItem extends Component {
         image: { url },
       },
     } = this.props.item;
-
+    const levelUcFirst = level && (level[0].toUpperCase() + level.slice(1)).slice(0, 3);
+    const timeType = time_type && (time_type[0].toUpperCase() + time_type.slice(1)).replace(/_+/g, ' ');
+    const periodType = period_type && period_type[0].toUpperCase() + period_type.slice(1).slice(0, 0);
     return (
       <div className="job-box-block">
         <div className="panel panel-default job-box">
           {this.getHeader(created_at, title, url, full_name, total_rate)}
-          {this.getBody(description)}
+          {this.getBody(description, levelUcFirst, timeType, skill_tags, period, periodType)}
           <div className="job-box-footer flexbox justify-space-between">
-            <div>
-              <div className="additional-info blue-color"> {promotion_title}</div>
+            <div className="job-box-footer__inner">
+              <div className="additional-info blue-color">{promotion_title || 'There is no skill test'}</div>
               <div className="card-promotion-description one-row-angular-truncate">{promotion_description}</div>
             </div>
             <button className="btn btn-blue btn-skill-test btn-bold">Free</button>
