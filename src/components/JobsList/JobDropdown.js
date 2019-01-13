@@ -2,10 +2,54 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
 import { isValue, toCutText } from '../../utils';
+import { Link } from 'react-router-dom';
 
-class JobDropdown extends Component {
+class JobDropDown extends Component {
+  getLevel = level => {
+    if (level === '0') {
+      return <span>Fluent</span>;
+    }
+    if (level === '1') {
+      return <span>Conversation, Read & Write</span>;
+    }
+    if (level === '2') {
+      return <span>Only Read & Write</span>;
+    }
+    if (level === '3') {
+      return <span>Don’t know at all</span>;
+    } else {
+      return '';
+    }
+  };
+
+  metalanguages = array => {
+    return array.map(item => {
+      const { level, name } = item;
+      const levelStr = level !== null && level.toString();
+      return (
+        <Fragment key={uuid()}>
+          {name}
+          {level !== null ? ': ' : ''}
+          {this.getLevel(levelStr)};
+          <br />
+        </Fragment>
+      );
+    });
+  };
+
   render() {
-    const { ev, imageUrl, full_name, onCloseDropDown, rate, total_jobs, skill_test_send } = this.props;
+    const {
+      id,
+      ev,
+      imageUrl,
+      full_name,
+      onCloseDropDown,
+      rate,
+      total_jobs,
+      skill_test_send,
+      place_to_work,
+      languages,
+    } = this.props;
 
     return (
       <Fragment>
@@ -47,13 +91,11 @@ class JobDropdown extends Component {
               </div>
               <div className="info-block">
                 <div className="title">Languages</div>
-                <div className="text">
-                  English: <span>fluent</span>; Russian: <span>native</span>
-                </div>
+                <div className="text">{this.metalanguages(languages)}</div>
               </div>
               <div className="info-block">
                 <div className="title">Place of Work</div>
-                <div className="text">Online</div>
+                <div className="text">{place_to_work || 'offline'}</div>
               </div>
               <div className="info-block info-block--btns">
                 <button className="btn btn-blue-border btn-bold btn-blue-hover btn-with-icon" type="button">
@@ -62,16 +104,11 @@ class JobDropdown extends Component {
                     <span className="btn-text">Send a bid</span>
                   </div>
                 </button>
+                <Link to={`/dashboard/${id}`}>link To {id}</Link>
                 <button className="btn btn-blue-border btn-bold btn-blue-hover btn-with-icon" type="button">
                   <div className="button-content">
                     <span className="icon icon-output" />
                     <span className="btn-text">More Info</span>
-                  </div>
-                </button>
-                <button className="btn btn-blue-border btn-bold btn-blue-hover btn-with-icon" type="button">
-                  <div className="button-content">
-                    <span className="icon icon-comment" />
-                    <span className="btn-text">Message</span>
                   </div>
                 </button>
               </div>
@@ -153,9 +190,12 @@ class JobDropdown extends Component {
   }
 }
 
-JobDropdown.propTypes = {
+JobDropDown.propTypes = {
   ev: PropTypes.bool,
+  id: PropTypes.number,
+  place_to_work: PropTypes.string,
   rate: PropTypes.number,
+  languages: PropTypes.array,
   skill_test_send: PropTypes.number,
   total_jobs: PropTypes.number,
   imageUrl: PropTypes.string,
@@ -163,4 +203,4 @@ JobDropdown.propTypes = {
   onCloseDropDown: PropTypes.func,
 };
 
-export default JobDropdown;
+export default JobDropDown;

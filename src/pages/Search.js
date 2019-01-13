@@ -14,6 +14,7 @@ class SearchPage extends React.Component {
   onChangeJobTalentsToogler = value => {
     this.setState({ jobTalentsToogler: value });
   };
+
   onToogleJobTalentsToogler = () => {
     if (this.state.jobTalentsToogler === 'jobs') {
       this.setState({ jobTalentsToogler: 'talents' });

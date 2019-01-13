@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import uuid from 'uuid/v4';
-import JobDropdown from './JobDropdown';
+import JobDropDown from './JobDropDown';
 import { isValue, toCutText } from '../../utils';
 
 class JobsListItem extends Component {
-  getHeader = (created, title, imageUrl, name, rate) => {
+  getHeader = (created, title, imageUrl, name, rate, place_to_work) => {
     const dayAgo = moment(created).fromNow();
     return (
       <div className="job-box-header flexbox justify-space-between">
@@ -21,7 +21,7 @@ class JobsListItem extends Component {
                 className="job-box-photo bg-cover circul-shape"
                 style={imageUrl && { backgroundImage: `url(${imageUrl})` }}
               >
-                <i className="notif" />
+                {place_to_work && <i className="notif" />}
               </div>
             </div>
             <div className="award">
@@ -142,6 +142,8 @@ class JobsListItem extends Component {
           total_rate,
           total_jobs,
           country,
+          place_to_work,
+          languages,
           skill_test_send,
           image: { url },
         },
@@ -155,19 +157,22 @@ class JobsListItem extends Component {
     return (
       <div className="job-box-block">
         <div className="panel panel-default job-box" onClick={() => onOpenDropDown(id)}>
-          {this.getHeader(created_at, title, imageUrl, full_name, total_rate)}
+          {this.getHeader(created_at, title, imageUrl, full_name, total_rate, place_to_work)}
           {this.getBody(description, levelUcFirst, timeType, skill_tags, period, periodType, commitment, country)}
           {this.getFooter(promotion_title, promotion_description)}
         </div>
 
         {isDropDownOpened && (
-          <JobDropdown
+          <JobDropDown
+            id={id}
             onCloseDropDown={onCloseDropDown}
             ev={ev}
             imageUrl={imageUrl}
             full_name={full_name}
             rate={total_rate}
             total_jobs={total_jobs}
+            place_to_work={place_to_work}
+            languages={languages}
             skill_test_send={skill_test_send}
           />
         )}

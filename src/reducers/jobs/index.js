@@ -3,6 +3,8 @@ import ActionTypes from '../../actionTypes';
 
 const initialState = {
   isLoadJobs: false,
+  isLoadJob: false,
+  job: {},
   jobs: [],
   meta: {},
 };
@@ -25,6 +27,19 @@ export default function jobsReducer(state = initialState, action) {
       }
       case ActionTypes.FETCH_JOBS_FAILURE: {
         draft.isLoadJobs = false;
+        return;
+      }
+      case ActionTypes.FETCH_JOB_REQUEST: {
+        draft.isLoadJob = true;
+        return;
+      }
+      case ActionTypes.FETCH_JOB_SUCCESS: {
+        draft.job = action.payload.job;
+        draft.isLoadJob = false;
+        return;
+      }
+      case ActionTypes.FETCH_JOB_FAILURE: {
+        draft.isLoadJob = false;
         return;
       }
       default:

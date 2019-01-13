@@ -4,9 +4,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import queryString from 'query-string';
 import { signUp, logout, login } from '../../reducers/auth/actions';
-import { fetchJobs } from '../../reducers/jobs/actions';
+import { fetchJobs, fetchJob } from '../../reducers/jobs/actions';
 import { fetchTellents } from '../../reducers/tellents/actions';
-import { getUserData, getJobs, getTellents, isAuthenticated, getMetaJobs, getMetaTellents } from '../../selectors';
+import {
+  getUserData,
+  getJobs,
+  getTellents,
+  isAuthenticated,
+  getMetaJobs,
+  getMetaTellents,
+  getJob,
+} from '../../selectors';
 
 function searchContainer(Component) {
   class SearchContainer extends Component {
@@ -15,12 +23,23 @@ function searchContainer(Component) {
     };
 
     componentWillMount = () => {
-      const { isAuthenticated, fetchJobs, fetchTellents } = this.props;
+      const {
+        isAuthenticated,
+        fetchJobs,
+        fetchTellents,
+        fetchJob,
+        match: {
+          params: { userJobsId },
+        },
+      } = this.props;
       const { parsed } = this.state;
       if (isAuthenticated) {
-        // fetchJobs(67, parsed);
+        // fetchJobs(68, parsed);
         fetchJobs(1, parsed);
         fetchTellents(1, parsed);
+      }
+      if (userJobsId) {
+        fetchJob(userJobsId);
       }
     };
 
@@ -43,6 +62,7 @@ function searchContainer(Component) {
     };
 
     render() {
+      console.log('props', this.props);
       return (
         <Component
           {...this.props}
@@ -57,10 +77,13 @@ function searchContainer(Component) {
     isAuthenticated: PropTypes.bool,
     signUp: PropTypes.func,
     fetchJobs: PropTypes.func,
+    fetchJob: PropTypes.func,
     fetchTellents: PropTypes.func,
     location: PropTypes.object,
     jobs: PropTypes.array,
+    job: PropTypes.object,
     users: PropTypes.array,
+    match: PropTypes.object,
     metaJobs: PropTypes.object,
     metaUsers: PropTypes.object,
   };
@@ -69,6 +92,7 @@ function searchContainer(Component) {
     return {
       isAuthenticated: isAuthenticated(state),
       user: getUserData(state),
+      job: getJob(state),
       jobs: getJobs(state),
       metaJobs: getMetaJobs(state),
       users: getTellents(state),
@@ -77,7 +101,7 @@ function searchContainer(Component) {
   };
 
   const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ signUp, logout, login, fetchJobs, fetchTellents }, dispatch);
+    return bindActionCreators({ signUp, logout, login, fetchJobs, fetchTellents, fetchJob }, dispatch);
   };
 
   return connect(
