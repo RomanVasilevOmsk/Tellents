@@ -8,7 +8,7 @@ import searchContainer from '../containers/SearchContainer';
 
 class SearchPage extends React.Component {
   state = {
-    jobTalentsToogler: 'jobs',
+    jobTalentsToogler: 'talents',
   };
 
   onChangeJobTalentsToogler = value => {

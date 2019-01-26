@@ -98,6 +98,23 @@
   margin: 0;
   overflow: visible;
 }
+.job-boxes .other-details .other-description {
+  font-size: 13px;
+  color: #4b5053;
+}
+.job-details-talents-position {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.job-details-feedback-scroll {
+  height: 320px;
+  display: block;
+  overflow-y: overlay;
+  overflow-x: hidden;
+}
+
 .job-boxes-header .search-filter {
   height: 100%;
 }

@@ -62,7 +62,6 @@ function searchContainer(Component) {
     };
 
     render() {
-      console.log('props', this.props);
       return (
         <Component
           {...this.props}

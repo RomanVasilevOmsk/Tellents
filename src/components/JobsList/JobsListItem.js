@@ -137,6 +137,10 @@ class JobsListItem extends Component {
         id,
         skill_tags,
         commitment,
+        price,
+        offers,
+        payment,
+        hourly_price,
         user: {
           full_name,
           total_rate,
@@ -153,7 +157,7 @@ class JobsListItem extends Component {
     const levelUcFirst = level && (level[0].toUpperCase() + level.slice(1)).slice(0, 3);
     const timeType = time_type && (time_type[0].toUpperCase() + time_type.slice(1)).replace(/_+/g, ' ');
     const periodType = period_type && period_type[0].toUpperCase() + period_type.slice(1).slice(0, 0);
-
+    const paymentUcFirst = payment && payment[0].toUpperCase() + payment.slice(1).replace(/_price+/g, ' ');
     return (
       <div className="job-box-block">
         <div className="panel panel-default job-box" onClick={() => onOpenDropDown(id)}>
@@ -167,13 +171,22 @@ class JobsListItem extends Component {
             id={id}
             onCloseDropDown={onCloseDropDown}
             ev={ev}
+            title={title}
+            description={description}
+            promotion_title={promotion_title}
+            promotion_description={promotion_description}
             imageUrl={imageUrl}
+            period={period}
+            periodType={periodType}
             full_name={full_name}
             rate={total_rate}
             total_jobs={total_jobs}
             place_to_work={place_to_work}
             languages={languages}
             skill_test_send={skill_test_send}
+            hourly_price={hourly_price}
+            payment={paymentUcFirst}
+            price={price}
           />
         )}
       </div>

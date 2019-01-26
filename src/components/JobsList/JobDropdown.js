@@ -42,6 +42,8 @@ class JobDropDown extends Component {
       id,
       ev,
       imageUrl,
+      title,
+      description,
       full_name,
       onCloseDropDown,
       rate,
@@ -49,8 +51,14 @@ class JobDropDown extends Component {
       skill_test_send,
       place_to_work,
       languages,
+      promotion_title,
+      promotion_description,
+      period,
+      periodType,
+      payment,
+      hourly_price,
+      price,
     } = this.props;
-
     return (
       <Fragment>
         <div className="caret-block">
@@ -104,31 +112,33 @@ class JobDropDown extends Component {
                     <span className="btn-text">Send a bid</span>
                   </div>
                 </button>
-                <Link to={`/dashboard/${id}`}>link To {id}</Link>
-                <button className="btn btn-blue-border btn-bold btn-blue-hover btn-with-icon" type="button">
+                <Link
+                  to={`/dashboard/${id}`}
+                  className="btn btn-blue-border btn-bold btn-blue-hover btn-with-icon"
+                  type="button"
+                >
                   <div className="button-content">
                     <span className="icon icon-output" />
                     <span className="btn-text">More Info</span>
                   </div>
-                </button>
+                </Link>
               </div>
             </div>
-            <div className="job-details-right">
+            <div className="job-details-right job-details-talents-position">
               <div className="job-details-right-header flexbox">
                 <div className="likes flexbox">
                   <span className="icon icon-shape" />
-                  <ul className="likes-list list-unstyled">
-                    <li className="like-item like-item--1 bg-cover circul-shape" />
-                    <li className="like-item like-item--2 bg-cover circul-shape" />
-                    <li className="like-item like-item--3 bg-cover circul-shape" />
-                    <li className="like-item like-item--1 bg-cover circul-shape" />
-                  </ul>
+                  {
+                    <ul className="likes-list list-unstyled">
+                      <span>No recommendation yet</span>
+                    </ul>
+                  }
                 </div>
                 <div className="stat flexbox justify-space-center flex-wrap">
                   <div className="stat-block">
                     <span className="icon icon-tag" />
-                    <span className="stat-title blue-color">FIXED</span>
-                    <span className="stat-info">$200</span>
+                    <span className="stat-title blue-color">{payment}</span>
+                    <span className="stat-info">{`${hourly_price ? '$' + hourly_price : ''}`}</span>
                   </div>
                   <div className="stat-block">
                     <span className="icon icon-comments" />
@@ -138,47 +148,27 @@ class JobDropDown extends Component {
                   <div className="stat-block">
                     <span className="icon icon-accounts" />
                     <span className="stat-title blue-color">BUDGET</span>
-                    <span className="stat-info">$1000</span>
+                    <span className="stat-info">{`${price ? '$' + price : ''} `}</span>
                   </div>
                   <div className="stat-block">
                     <span className="icon icon-clock-1" />
                     <span className="stat-title blue-color">COMPLETE</span>
-                    <span className="stat-info">5</span>
+                    <span className="stat-info">{isValue(period + periodType)}</span>
                   </div>
                 </div>
               </div>
               <div className="job-details-right-body">
                 <div className="job-details-descr">
-                  <div className="job-title">Looking for back end programmer</div>
-                  <div className="job-descr-text">
-                    <p>
-                      Experience Level: Expert Description of requirements/features: Looking for experts at coding in
-                      Wordpress for Mobile use.
-                    </p>
-                    <p>
-                      Must be excellent at design/frontend/backend programming in the popular programming languages. You
-                      will combine elements from our current with a modified theme site on the Wordpress platform.
-                    </p>
-                    <p>The new site will be responsive/mobile.</p>
-                    <p>
-                      The new site should load quickly and be user friendly on Mac, PC, Android phone/tablet, Apple
-                      phone/tablet and Windows phone/tablet, Chrome, IE, Windows, Opera and Firefox browsers. Once these
-                      items are complete, if things go well we will hire your company as a site administrator on an
-                      hourly basis (performing changes when required). Your company should have excellent and excellent
-                      rating and feedback. You should be able to quickly complete assignments. Please submit your
-                      website portfolio (links of sites you have created).
-                    </p>
-                    <p>
-                      Make sure all links you submit are working links (not dead links). IMPORTANT: Please DO NOT submit
-                      websites you have not created. This will disqualify you. Please be prepared to show us proof of
-                      the work you have performed on all websites you have created.
-                    </p>
-                  </div>
+                  <div className="job-title">{title}</div>
+                  <div className="job-descr-text">{description}</div>
                 </div>
               </div>
               <div className="other-details">
                 <div className="panel flexbox justify-space-between panel-blue">
-                  <div className="other-title">Math Home Tutoring</div>
+                  <div>
+                    <div className="other-title">{promotion_title}</div>
+                    <div className="other-description">{promotion_description}</div>
+                  </div>
                   <span className="btn btn-blue-border btn-bold">Free</span>
                 </div>
               </div>
@@ -196,11 +186,20 @@ JobDropDown.propTypes = {
   place_to_work: PropTypes.string,
   rate: PropTypes.number,
   languages: PropTypes.array,
+  periodType: PropTypes.string,
+  period: PropTypes.number,
   skill_test_send: PropTypes.number,
   total_jobs: PropTypes.number,
+  title: PropTypes.string,
+  promotion_title: PropTypes.string,
+  description: PropTypes.string,
   imageUrl: PropTypes.string,
   full_name: PropTypes.string,
+  promotion_description: PropTypes.string,
   onCloseDropDown: PropTypes.func,
+  payment: PropTypes.string,
+  hourly_price: PropTypes.number,
+  price: PropTypes.number,
 };
 
 export default JobDropDown;
